@@ -1,0 +1,24 @@
+{
+  "name": "KUBIKO",
+  "short_name": "KUBIKO",
+  "description": "Puzzle arcade tátil 8x8 com 5 mundos de materiais físicos, mascote OLED reativo e 12 assinaturas sonoras de combo.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EFECE6",
+  "theme_color": "#EFECE6",
+  "lang": "pt-BR",
+  "categories": [
+    "games",
+    "puzzle"
+  ],
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
