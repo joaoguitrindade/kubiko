@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#EFECE6" id="metaThemeColor" />
-  <meta name="description" content="KUBIKO — Puzzle arcade tátil 8x8." />
+  <meta name="description" content="KUBIKO — Puzzle arcade tátil 8x8 com 5 mundos físicos, mascote OLED reativo e 12 assinaturas musicais de streak." />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -61,7 +61,7 @@
     }
 
     /* =========================================================================
-       HOMEPAGE
+       HOMEPAGE (TELA INICIAL COM BOTÃO JOGAR)
        ========================================================================= */
     .home-screen {
       position: fixed;
@@ -708,7 +708,7 @@
       <div class="home-top-row">
         <span class="home-edition">
           <span class="world-dot"></span>
-          ARCADE
+          GRID 8×8 ARCADE
         </span>
         <button type="button" class="key-btn" id="btnHomeSound" aria-label="Alternar som" title="Som">
           <svg class="snd-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
@@ -2184,13 +2184,49 @@
       }
     }
 
-    function pickWeightedShape() {
+    // Dificuldade progressiva contínua (0.0 no início -> 1.0 no late-game)
+    function getDifficultyFactor(score, movesPlayed) {
+      const byScore = Math.min(1, score / 4200);
+      const byMoves = Math.min(1, movesPlayed / 55);
+      return Math.min(1, byScore * 0.65 + byMoves * 0.35);
+    }
+
+    function countMatrixBlocks(matrix) {
+      let n = 0;
+      for (let r = 0; r < matrix.length; r++) {
+        for (let c = 0; c < matrix[0].length; c++) {
+          if (matrix[r][c]) n++;
+        }
+      }
+      return n;
+    }
+
+    // Seleciona exclusivamente do catálogo canônico SHAPES, escalando o peso de peças complexas com a dificuldade
+    function pickWeightedShape(difficulty = 0) {
+      const weights = SHAPES.map(s => {
+        const blocks = countMatrixBlocks(s.m);
+        const span = Math.max(s.m.length, s.m[0].length);
+        let mult = 1;
+        if (blocks <= 2) {
+          // Peças triviais (1x1, 1x2) ficam mais raras conforme o jogo avança
+          mult = 1 - difficulty * 0.55;
+        } else if (blocks === 3) {
+          mult = 1 - difficulty * 0.15;
+        } else if (blocks === 4) {
+          mult = 1 + difficulty * 0.2;
+        } else {
+          // Peças grandes (5+ blocos, L 3x3, 2x3, 3x3, barra 1x5) aumentam progressivamente
+          mult = 0.75 + difficulty * 0.95 + (span >= 4 ? difficulty * 0.25 : 0);
+        }
+        return Math.max(0.8, s.w * mult);
+      });
+
       let total = 0;
-      for (const s of SHAPES) total += s.w;
+      for (const w of weights) total += w;
       let roll = Math.random() * total;
-      for (const s of SHAPES) {
-        roll -= s.w;
-        if (roll <= 0) return s.m;
+      for (let i = 0; i < SHAPES.length; i++) {
+        roll -= weights[i];
+        if (roll <= 0) return SHAPES[i].m;
       }
       return SHAPES[0].m;
     }
@@ -2221,102 +2257,63 @@
       return { grid: next, cleared: fullRows.length + fullCols.length };
     }
 
-    // Extrai a matriz normalizada de uma lista de coordenadas {r, c} (se <= 3x3 ou barra 1x4/1x5)
-    function coordsToMatrix(coords) {
-      if (!coords || coords.length === 0 || coords.length > 6) return null;
-      let minR = 8, maxR = -1, minC = 8, maxC = -1;
-      for (const pt of coords) {
-        if (pt.r < minR) minR = pt.r;
-        if (pt.r > maxR) maxR = pt.r;
-        if (pt.c < minC) minC = pt.c;
-        if (pt.c > maxC) maxC = pt.c;
-      }
-      const h = maxR - minR + 1;
-      const w = maxC - minC + 1;
-      if (h > 4 || w > 4) return null;
-      if (h === 4 && w > 1) return null;
-      if (w === 4 && h > 1) return null;
-      const m = Array.from({ length: h }, () => Array(w).fill(0));
-      for (const pt of coords) m[pt.r - minR][pt.c - minC] = 1;
-      return { matrix: m, sr: minR, sc: minC };
-    }
-
-    // Encontra uma peça que, encaixada no grid fornecido, limpa >= 1 linha/coluna
-    function findComboKeyMoveOnGrid(board, grid) {
+    /**
+     * Busca EXCLUSIVAMENTE dentro do catálogo original SHAPES uma peça que,
+     * se encaixada na posição correta pelo jogador, gera limpeza de linha/coluna.
+     * Nunca cria peças novas nem formatos artificiais.
+     */
+    function findCanonicalComboShape(board, grid, difficulty, usedIndices) {
       const candidates = [];
 
-      // 1. Checa lacunas exatas de linhas quase cheias (1 a 4 células faltando)
-      for (let r = 0; r < BOARD_SIZE; r++) {
-        const missing = [];
-        for (let c = 0; c < BOARD_SIZE; c++) {
-          if (grid[r][c] === null) missing.push({ r, c });
-        }
-        if (missing.length >= 1 && missing.length <= 4) {
-          const parsed = coordsToMatrix(missing);
-          if (parsed && board.canPlace(parsed.matrix, parsed.sr, parsed.sc, grid)) {
-            const sim = simulatePlaceAndClear(grid, parsed.matrix, parsed.sr, parsed.sc, 0);
-            if (sim.cleared > 0) {
-              candidates.push({ ...parsed, cleared: sim.cleared, nextGrid: sim.grid });
-            }
-          }
-        }
-      }
+      for (let i = 0; i < SHAPES.length; i++) {
+        if (usedIndices && usedIndices.has(i)) continue;
+        const matrix = SHAPES[i].m;
+        const blocks = countMatrixBlocks(matrix);
 
-      // 2. Checa lacunas exatas de colunas quase cheias
-      for (let c = 0; c < BOARD_SIZE; c++) {
-        const missing = [];
+        // Em dificuldades maiores, evita entregar o bloco 1x1 trivial como recompensa fácil
+        if (difficulty > 0.3 && blocks === 1) continue;
+
+        let bestForShape = null;
         for (let r = 0; r < BOARD_SIZE; r++) {
-          if (grid[r][c] === null) missing.push({ r, c });
-        }
-        if (missing.length >= 1 && missing.length <= 4) {
-          const parsed = coordsToMatrix(missing);
-          if (parsed && board.canPlace(parsed.matrix, parsed.sr, parsed.sc, grid)) {
-            const sim = simulatePlaceAndClear(grid, parsed.matrix, parsed.sr, parsed.sc, 0);
-            if (sim.cleared > 0) {
-              candidates.push({ ...parsed, cleared: sim.cleared, nextGrid: sim.grid });
-            }
-          }
-        }
-      }
-
-      // 3. Checa peças padrão do catálogo que gerem limpezas (inclusive cruzes linha+coluna)
-      if (candidates.length === 0) {
-        const shuffled = SHAPES.slice().sort(() => Math.random() - 0.5);
-        for (const s of shuffled) {
-          for (let r = 0; r < BOARD_SIZE; r++) {
-            for (let c = 0; c < BOARD_SIZE; c++) {
-              if (board.canPlace(s.m, r, c, grid)) {
-                const pred = board.predictClears(s.m, r, c, grid);
-                const total = pred.rows.length + pred.cols.length;
-                if (total > 0) {
-                  const sim = simulatePlaceAndClear(grid, s.m, r, c, 0);
-                  candidates.push({ matrix: s.m, sr: r, sc: c, cleared: total, nextGrid: sim.grid });
-                  break;
-                }
+          for (let c = 0; c < BOARD_SIZE; c++) {
+            if (!board.canPlace(matrix, r, c, grid)) continue;
+            const pred = board.predictClears(matrix, r, c, grid);
+            const total = pred.rows.length + pred.cols.length;
+            if (total > 0) {
+              if (!bestForShape || total > bestForShape.cleared) {
+                bestForShape = { shapeIdx: i, matrix, sr: r, sc: c, cleared: total, blocks };
               }
             }
-            if (candidates.length >= 6) break;
           }
-          if (candidates.length >= 6) break;
+        }
+
+        if (bestForShape) {
+          // Pontua favorecendo multi-linhas e peças de porte compatível com a dificuldade atual
+          const complexityBonus = difficulty * bestForShape.blocks * 0.45;
+          bestForShape.rank = bestForShape.cleared * 3 + complexityBonus + Math.random() * 1.4;
+          candidates.push(bestForShape);
         }
       }
 
       if (candidates.length === 0) return null;
-      // Prioriza movimentos que limpam mais linhas simultaneamente
-      candidates.sort((a, b) => b.cleared - a.cleared);
-      const topPool = candidates.slice(0, Math.min(3, candidates.length));
-      return topPool[Math.floor(Math.random() * topPool.length)];
+      candidates.sort((a, b) => b.rank - a.rank);
+      const topSlice = candidates.slice(0, Math.min(4, candidates.length));
+      const chosen = topSlice[Math.floor(Math.random() * topSlice.length)];
+      const sim = simulatePlaceAndClear(grid, chosen.matrix, chosen.sr, chosen.sc, 0);
+      return { ...chosen, nextGrid: sim.grid };
     }
 
     /**
-     * Gerador inteligente da bandeja:
-     * - Em runs com combo ativo (combo >= 1), recompensa o jogador gerando de 1 a 3 peças
-     *   encadeadas matematicamente (Peça 1 -> limpa -> Peça 2 -> limpa -> Peça 3 -> limpa)!
-     * - Garante sempre que pelo menos 1 peça caiba no tabuleiro.
+     * Gerador da bandeja fiel ao catálogo original SHAPES com dificuldade progressiva:
+     * - Sem combo: distribuição padrão progressiva (fica mais exigente com pontuação/turnos).
+     * - Com combo ativo: recompensa o jogador incluindo peças DO PRÓPRIO CATÁLOGO SHAPES
+     *   que podem gerar novos combos caso encaixadas corretamente, mantendo os demais slots
+     *   na curva real de dificuldade.
      */
-    function generateRewardTray(board, activeCombo = 0) {
+    function generateTray(board, activeCombo = 0, score = 0, movesPlayed = 0) {
+      const difficulty = getDifficultyFactor(score, movesPlayed);
       const usedColors = new Set();
-      const fill = board.countFillRatio();
+      const usedComboShapeIdx = new Set();
 
       const pickColor = () => {
         let id = Math.floor(Math.random() * BLOCK_PALETTE.length);
@@ -2327,20 +2324,29 @@
         return id;
       };
 
-      const rewardSlots = [null, null, null];
-      const chainTarget = activeCombo >= 3 ? 3 : (activeCombo === 2 ? 2 : (activeCombo === 1 ? 1 : 0));
+      const slots = [null, null, null];
 
-      if (chainTarget > 0) {
+      // Quantas peças de combo (exclusivamente de SHAPES) entram como recompensa
+      let comboPiecesTarget = 0;
+      if (activeCombo === 1) {
+        comboPiecesTarget = Math.random() < 0.55 ? 1 : 0;
+      } else if (activeCombo === 2) {
+        comboPiecesTarget = Math.random() < 0.25 ? 2 : (Math.random() < 0.8 ? 1 : 0);
+      } else if (activeCombo >= 3) {
+        comboPiecesTarget = Math.random() < 0.45 ? 2 : 1;
+      }
+
+      if (comboPiecesTarget > 0) {
         let simGrid = board.cloneGrid();
         const slotOrder = [0, 1, 2].sort(() => Math.random() - 0.5);
 
-        for (let step = 0; step < chainTarget; step++) {
-          const move = findComboKeyMoveOnGrid(board, simGrid);
+        for (let step = 0; step < comboPiecesTarget; step++) {
+          const move = findCanonicalComboShape(board, simGrid, difficulty, usedComboShapeIdx);
           if (!move) break;
-          const cId = pickColor();
-          rewardSlots[slotOrder[step]] = {
+          usedComboShapeIdx.add(move.shapeIdx);
+          slots[slotOrder[step]] = {
             matrix: move.matrix,
-            colorId: cId,
+            colorId: pickColor(),
             spawnAnim: 0,
             isComboReward: true
           };
@@ -2348,67 +2354,70 @@
         }
       }
 
-      // Preenche slots restantes com peças equilibradas
+      // Slots restantes seguem a curva real de dificuldade do catálogo SHAPES
       for (let i = 0; i < 3; i++) {
-        if (rewardSlots[i]) continue;
-        let m = pickWeightedShape();
-        if (fill > 0.65 && m.length * m[0].length >= 6 && Math.random() < 0.55) {
-          m = SHAPES[Math.floor(Math.random() * 12)].m;
-        }
-        rewardSlots[i] = {
-          matrix: m,
+        if (slots[i]) continue;
+        slots[i] = {
+          matrix: pickWeightedShape(difficulty),
           colorId: pickColor(),
           spawnAnim: 0,
           isComboReward: false
         };
       }
 
-      // Garante anti-frustração: pelo menos 1 peça encaixável
-      if (!board.hasAnyValidMove(rewardSlots)) {
+      // Regra justa anti-softlock no início/meio (no late game, permite derrota legítima se não houver espaço)
+      if (!board.hasAnyValidMove(slots) && difficulty < 0.35) {
         const fitting = SHAPES.filter(s => board.canFitMatrixAnywhere(s.m));
         if (fitting.length > 0) {
           const chosen = fitting[Math.floor(Math.random() * fitting.length)];
-          rewardSlots[Math.floor(Math.random() * 3)].matrix = chosen.m;
+          slots[Math.floor(Math.random() * 3)].matrix = chosen.m;
         }
       }
 
-      return rewardSlots;
+      return slots;
     }
 
     /**
-     * Setup Inicial de Combo-Run:
-     * Em ~55% das runs (e garantido na 1ª partida da sessão), prepara o tabuleiro com
-     * encaixes estratégicos e entrega na bandeja inicial exatamente as 3 peças que,
-     * se posicionadas corretamente, disparam 3 combos consecutivos!
+     * Em ~35% das runs, prepara o tabuleiro com um arranjo tático inicial e 3 peças
+     * EXCLUSIVAMENTE do catálogo SHAPES que, se encaixadas na ordem certa, geram combos.
+     * Nas demais ~65% das runs, inicia o tabuleiro 100% limpo com a distribuição padrão.
      */
     function seedComboOpeningRun(board) {
       board.reset();
 
       const presets = [
-        // Preset 1: Escada Tripla (3 linhas quase prontas + encaixes L, Barra e 2x2)
+        // Preset 1: Duas linhas + 1 coluna em tensão — exige leitura da ordem (1x3, L 2x2 e 1x2 de SHAPES)
         () => {
-          const cA = 1, cB = 2, cC = 3, cD = 0;
-          // Linha 5: falta (5,2), (5,3), (5,4) -> peça 1x3
-          for (let c = 0; c < 8; c++) if (c < 2 || c > 4) board.grid[5][c] = cA;
-          // Linha 6: falta (6,1), (6,2) e (7,1) -> peça L 2x2
-          for (let c = 0; c < 8; c++) if (c !== 1 && c !== 2) board.grid[6][c] = cB;
-          // Linha 7: falta (7,1), (7,5), (7,6) -> após limpar linha 6, sobra (7,1) ou par (7,5..7,6)
-          for (let c = 0; c < 8; c++) if (c !== 1 && c !== 5 && c !== 6) board.grid[7][c] = cC;
-          // Blocos decorativos na base para a peça 2x2 fechar a linha 7
-          board.grid[7][1] = cD;
+          for (let c = 0; c < 8; c++) {
+            if (c < 2 || c > 4) board.grid[5][c] = 1;
+            if (c !== 1 && c !== 2) board.grid[6][c] = 2;
+            if (c !== 5 && c !== 6) board.grid[7][c] = 3;
+          }
+          // Abre espaço vertical para o L encaixar em (5,1)-(6,1)-(6,2) apenas após limpar ou em ordem certa
+          board.grid[5][1] = null;
+          board.grid[5][2] = null;
+          board.grid[5][3] = 1;
+          board.grid[5][4] = null;
+          // Recalibra linha 5 para faltar exatamente (5,2),(5,3),(5,4)
+          board.grid[5][1] = 1;
+          board.grid[5][2] = null;
+          board.grid[5][3] = null;
+          board.grid[5][4] = null;
+          // Linha 7: falta (7,1) para o L e (7,5),(7,6) para o 1x2 -> após L em (6,1), falta só (7,5),(7,6)!
+          board.grid[7][1] = null;
 
           return [
-            { matrix: [[1, 1, 1]], colorId: 0, spawnAnim: 0, isComboReward: true },
-            { matrix: [[1, 1], [1, 0]], colorId: 4, spawnAnim: 0, isComboReward: true },
-            { matrix: [[1, 1]], colorId: 2, spawnAnim: 0, isComboReward: true }
+            { matrix: SHAPES[3].m, colorId: 0, spawnAnim: 0, isComboReward: true }, // 1x3
+            { matrix: SHAPES[5].m, colorId: 4, spawnAnim: 0, isComboReward: true }, // L [[1,1],[1,0]]
+            { matrix: SHAPES[1].m, colorId: 2, spawnAnim: 0, isComboReward: true }  // 1x2
           ];
         },
-        // Preset 2: Cruz de Ouro (Linha 4 + Coluna 4 cruzam num 2x2 aberto -> Combo duplo + cadeia!)
+        // Preset 2: Cruz Central — 2x2 fecha linha + coluna, abrindo linha 6 e coluna 1 (todas de SHAPES)
         () => {
           for (let c = 0; c < 8; c++) {
             if (c !== 3 && c !== 4) {
               board.grid[3][c] = 1;
-              board.grid[4][c] = 2;
+              board.grid[4][c] = 5;
             }
           }
           for (let r = 0; r < 8; r++) {
@@ -2417,62 +2426,44 @@
               board.grid[r][4] = 4;
             }
           }
-          // Linha 6 quase cheia (faltam colunas 3 e 4)
           for (let c = 0; c < 8; c++) {
-            if (c !== 3 && c !== 4) board.grid[6][c] = 5;
+            if (c !== 3 && c !== 4) board.grid[6][c] = 6;
           }
-          // Coluna 1 quase cheia (faltam linhas 0, 1, 2)
           for (let r = 3; r < 8; r++) {
-            if (board.grid[r][1] === null) board.grid[r][1] = 6;
+            if (board.grid[r][1] === null) board.grid[r][1] = 2;
           }
 
           return [
-            { matrix: [[1, 1], [1, 1]], colorId: 0, spawnAnim: 0, isComboReward: true }, // Fecha 2 linhas + 2 colunas de uma vez!
-            { matrix: [[1, 1]], colorId: 3, spawnAnim: 0, isComboReward: true },         // Fecha linha 6!
-            { matrix: [[1], [1], [1]], colorId: 2, spawnAnim: 0, isComboReward: true }   // Fecha coluna 1!
+            { matrix: SHAPES[9].m, colorId: 0, spawnAnim: 0, isComboReward: true }, // 2x2
+            { matrix: SHAPES[1].m, colorId: 3, spawnAnim: 0, isComboReward: true }, // 1x2
+            { matrix: SHAPES[4].m, colorId: 2, spawnAnim: 0, isComboReward: true }  // 3x1
           ];
         },
-        // Preset 3: Cascata Vertical (Colunas 2, 5 e Linha 7 encaixáveis em 3 passos)
+        // Preset 3: Colunas e Base — T + 3x1 + 1x2 de SHAPES
         () => {
           for (let r = 0; r < 8; r++) {
-            if (r !== 1 && r !== 2) board.grid[r][2] = 2;
-            if (r !== 4 && r !== 5 && r !== 6) board.grid[r][5] = 4;
+            if (r !== 2 && r !== 3 && r !== 4) board.grid[r][5] = 4;
           }
           for (let c = 0; c < 8; c++) {
-            if (c !== 0 && c !== 1 && c !== 2 && c !== 5) board.grid[7][c] = 1;
+            if (c !== 2 && c !== 3 && c !== 4) board.grid[6][c] = 1;
+            if (c !== 3 && c !== 5 && c !== 6) board.grid[7][c] = 2;
           }
-          board.grid[7][2] = 3;
           board.grid[7][5] = 3;
-
+          // Em (6,2..4) + (7,3) encaixa o T [[1,1,1],[0,1,0]] limpando linha 6; depois 3x1 em (2..4,5) limpa col 5; depois sobra (7,6) -> ajustamos (7,5) vazio para 1x2
+          board.grid[7][5] = null;
+          board.grid[7][6] = null;
+          board.grid[7][3] = null;
+          // Coluna 5 precisa de (7,5) depois da linha 7 ou antes -> limpa col 5 com 3x1 em (2..4,5) usando (7,5) preenchido pelo 1x2 em (7,5..6)!
           return [
-            { matrix: [[1], [1]], colorId: 0, spawnAnim: 0, isComboReward: true },
-            { matrix: [[1], [1], [1]], colorId: 5, spawnAnim: 0, isComboReward: true },
-            { matrix: [[1, 1]], colorId: 3, spawnAnim: 0, isComboReward: true }
+            { matrix: SHAPES[12].m, colorId: 0, spawnAnim: 0, isComboReward: true }, // T [[1,1,1],[0,1,0]]
+            { matrix: SHAPES[1].m, colorId: 3, spawnAnim: 0, isComboReward: true },  // 1x2
+            { matrix: SHAPES[4].m, colorId: 5, spawnAnim: 0, isComboReward: true }   // 3x1
           ];
         }
       ];
 
       const chosenPreset = presets[Math.floor(Math.random() * presets.length)];
       return chosenPreset().sort(() => Math.random() - 0.5);
-    }
-
-    function generateCleanOpeningTray() {
-      // Tabuleiro limpo, mas as 3 peças iniciais somam exatamente 8 blocos complementares (ex: 3 + 3 + 2)
-      // Se alinhadas na mesma linha ou coluna, geram combo logo na primeira bandeja!
-      const patterns = [
-        [ [[1, 1, 1]], [[1, 1, 1]], [[1, 1]] ],
-        [ [[1], [1], [1]], [[1], [1], [1]], [[1], [1]] ],
-        [ [[1, 1, 1, 1]], [[1, 1]], [[1, 1]] ],
-        [ [[1, 1, 1], [1, 1, 1]], [[1, 1, 1], [1, 1, 1]], [[1, 1], [1, 1]] ]
-      ];
-      const pick = patterns[Math.floor(Math.random() * patterns.length)];
-      const colors = [0, 1, 2, 3, 4, 5, 6].sort(() => Math.random() - 0.5);
-      return pick.map((m, idx) => ({
-        matrix: m,
-        colorId: colors[idx],
-        spawnAnim: 0,
-        isComboReward: true
-      })).sort(() => Math.random() - 0.5);
     }
 
     /* =========================================================================
@@ -2513,6 +2504,7 @@
         this.hasPlayedInSession = false;
 
         this.score = 0;
+        this.movesPlayed = 0;
         this.bestScore = this.loadBestScore();
         this.beatRecordThisRun = false;
         this.combo = 0;
@@ -2631,6 +2623,7 @@
             grid: this.board.grid,
             tray: this.tray.map(p => p ? { matrix: p.matrix, colorId: p.colorId, isComboReward: Boolean(p.isComboReward) } : null),
             score: this.score,
+            movesPlayed: this.movesPlayed,
             combo: this.combo,
             fuseMoves: this.fuseMoves,
             linesSinceShift: this.linesSinceShift,
@@ -2662,9 +2655,10 @@
             isComboReward: Boolean(p.isComboReward)
           } : null);
           if (this.tray.every(p => p === null)) {
-            this.tray = generateRewardTray(this.board, this.combo);
+            this.tray = generateTray(this.board, this.combo, this.score, this.movesPlayed);
           }
           this.score = data.score | 0;
+          this.movesPlayed = data.movesPlayed | 0;
           this.combo = data.combo | 0;
           this.fuseMoves = data.fuseMoves | 0;
           this.linesSinceShift = data.linesSinceShift | 0;
@@ -2811,6 +2805,7 @@
       startNewGame(clearSaved) {
         this.board.reset();
         this.score = 0;
+        this.movesPlayed = 0;
         this.beatRecordThisRun = false;
         this.combo = 0;
         this.fuseMoves = 0;
@@ -2830,8 +2825,9 @@
         this.popups.forEach(p => p.active = false);
         this.banners.forEach(b => b.active = false);
 
-        // Em 60% das runs (e garantido na 1ª partida da sessão), inicia uma Combo-Run engatilhada!
-        const useSeededComboBoard = !this.hasPlayedInSession || Math.random() < 0.6;
+        // Em ~35% das runs, inicia um arranjo tático de abertura usando apenas peças clássicas de SHAPES;
+        // nas demais ~65% das runs, inicia o tabuleiro clássico 100% limpo com dificuldade progressiva.
+        const useSeededComboBoard = Math.random() < 0.35;
         this.hasPlayedInSession = true;
 
         if (useSeededComboBoard) {
@@ -2843,9 +2839,8 @@
               }
             }
           }
-          this.spawnBanner('RUN DE COMBO!', '#FF551A');
         } else {
-          this.tray = generateCleanOpeningTray();
+          this.tray = generateTray(this.board, 0, 0, 0);
         }
 
         this.modal.classList.remove('open');
@@ -3026,6 +3021,7 @@
         if (!res) return;
 
         this.tray[trayIndex] = null;
+        this.movesPlayed++;
 
         for (const cell of res.placedCells) {
           this.cellPop[cell.r][cell.c] = 1;
@@ -3200,7 +3196,7 @@
 
         // Reabastece bandeja com peças de recompensa encadeadas se houver combo ativo!
         if (this.tray.every(p => p === null)) {
-          this.tray = generateRewardTray(this.board, this.combo);
+          this.tray = generateTray(this.board, this.combo, this.score, this.movesPlayed);
           if (this.combo >= 1) {
             // Estímulo visual sutil na bandeja indicando peças de combo recebidas
             const trayCenterY = this.trayY + this.trayH * 0.5;
