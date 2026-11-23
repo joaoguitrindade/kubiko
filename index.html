@@ -974,28 +974,150 @@
         cellInner: '#112335',
         ambientColor: '#38BDF8',
         oledColor: '#38BDF8'
+      },
+      {
+        id: 'forge',
+        name: 'FORJA COBRE',
+        style: 'brushed',
+        pageBg: '#161311',
+        surface: '#211C19',
+        surface2: '#2C2521',
+        border: '#44372F',
+        text: '#FAF3EC',
+        muted: '#B59E8E',
+        accent: '#F59E0B',
+        accentLip: '#B45309',
+        keyBg: '#27201C',
+        keyLip: '#100D0B',
+        keyText: '#FAF3EC',
+        fuseOff: '#3D3129',
+        boardBg: '#1D1815',
+        boardBorder: '#473930',
+        cellBg: '#27201C',
+        cellInner: '#1F1916',
+        ambientColor: '#F59E0B',
+        oledColor: '#FBBF24'
+      },
+      {
+        id: 'origami',
+        name: 'PAPEL ORIGAMI',
+        style: 'origami',
+        pageBg: '#F4F1EA',
+        surface: '#FFFFFF',
+        surface2: '#E9E4D8',
+        border: '#D5CEBE',
+        text: '#1C1917',
+        muted: '#6B655D',
+        accent: '#DC2626',
+        accentLip: '#991B1B',
+        keyBg: '#FFFFFF',
+        keyLip: '#CFC8B8',
+        keyText: '#1C1917',
+        fuseOff: '#D6D0C2',
+        boardBg: '#E6E0D3',
+        boardBorder: '#CCC4B2',
+        cellBg: '#DCD5C6',
+        cellInner: '#D1C9B8',
+        ambientColor: '#DC2626',
+        oledColor: '#F87171'
+      },
+      {
+        id: 'frost',
+        name: 'GELO ÁRTICO',
+        style: 'frost',
+        pageBg: '#E8F3FA',
+        surface: '#F7FBFF',
+        surface2: '#D8EAF6',
+        border: '#B8D4E8',
+        text: '#0F2537',
+        muted: '#4A6E8A',
+        accent: '#0284C7',
+        accentLip: '#0369A1',
+        keyBg: '#F7FBFF',
+        keyLip: '#B4D1E6',
+        keyText: '#0F2537',
+        fuseOff: '#BED7E8',
+        boardBg: '#D4E7F5',
+        boardBorder: '#A9CBE3',
+        cellBg: '#C4DDF0',
+        cellInner: '#B7D4EA',
+        ambientColor: '#38BDF8',
+        oledColor: '#38BDF8'
+      },
+      {
+        id: 'pcb',
+        name: 'CIRCUITO PCB',
+        style: 'circuit',
+        pageBg: '#0B1712',
+        surface: '#11231B',
+        surface2: '#173025',
+        border: '#254C3B',
+        text: '#EAFBF2',
+        muted: '#7EB59B',
+        accent: '#EAB308',
+        accentLip: '#A16207',
+        keyBg: '#142A20',
+        keyLip: '#07110C',
+        keyText: '#EAFBF2',
+        fuseOff: '#214234',
+        boardBg: '#0F2018',
+        boardBorder: '#26503D',
+        cellBg: '#162E23',
+        cellInner: '#10231A',
+        ambientColor: '#FACC15',
+        oledColor: '#FACC15'
+      },
+      {
+        id: 'marble',
+        name: 'ATELIÊ MÁRMORE',
+        style: 'marble',
+        pageBg: '#ECE6DC',
+        surface: '#F9F6F0',
+        surface2: '#E1D9CC',
+        border: '#CBBFA9',
+        text: '#231F1A',
+        muted: '#6E6456',
+        accent: '#0F766E',
+        accentLip: '#115E59',
+        keyBg: '#F9F6F0',
+        keyLip: '#C7BBA7',
+        keyText: '#231F1A',
+        fuseOff: '#CFC5B4',
+        boardBg: '#DED5C6',
+        boardBorder: '#C4B7A1',
+        cellBg: '#D2C7B5',
+        cellInner: '#C6BAA6',
+        ambientColor: '#0D9488',
+        oledColor: '#2DD4BF'
       }
     ];
 
+    // 14 Paletas vibrantes de alto contraste (ZERO violeta/lavanda)
     const BLOCK_PALETTE = [
-      { id: 0, base: '#FF551A', light: '#FF8657', dark: '#B83207', glow: '#FF703B' },
-      { id: 1, base: '#0EA5E9', light: '#56C8FA', dark: '#0369A1', glow: '#38BDF8' },
-      { id: 2, base: '#10B981', light: '#4CE0AE', dark: '#047857', glow: '#34D399' },
-      { id: 3, base: '#F59E0B', light: '#FCD34D', dark: '#B45309', glow: '#FBBF24' },
-      { id: 4, base: '#F43F5E', light: '#FB7185', dark: '#BE123C', glow: '#FB7185' },
-      { id: 5, base: '#2563EB', light: '#60A5FA', dark: '#1D4ED8', glow: '#3B82F6' },
-      { id: 6, base: '#14B8A6', light: '#5EEAD4', dark: '#0F766E', glow: '#2DD4BF' },
-      { id: 7, base: '#84CC16', light: '#BEF264', dark: '#4D7C0F', glow: '#A3E635' },
-      { id: 8, base: '#EC4899', light: '#F472B6', dark: '#BE185D', glow: '#F472B6' },
-      { id: 9, base: '#EA580C', light: '#FB923C', dark: '#9A3412', glow: '#F97316' }
+      { id: 0,  base: '#FF551A', light: '#FF8657', dark: '#B83207', glow: '#FF703B' }, // Laranja Industrial
+      { id: 1,  base: '#0EA5E9', light: '#56C8FA', dark: '#0369A1', glow: '#38BDF8' }, // Ciano Elétrico
+      { id: 2,  base: '#10B981', light: '#4CE0AE', dark: '#047857', glow: '#34D399' }, // Esmeralda
+      { id: 3,  base: '#F59E0B', light: '#FCD34D', dark: '#B45309', glow: '#FBBF24' }, // Ouro Solar
+      { id: 4,  base: '#F43F5E', light: '#FB7185', dark: '#BE123C', glow: '#FB7185' }, // Coral Rubi
+      { id: 5,  base: '#2563EB', light: '#60A5FA', dark: '#1D4ED8', glow: '#3B82F6' }, // Azul Safira
+      { id: 6,  base: '#14B8A6', light: '#5EEAD4', dark: '#0F766E', glow: '#2DD4BF' }, // Turquesa Menta
+      { id: 7,  base: '#84CC16', light: '#BEF264', dark: '#4D7C0F', glow: '#A3E635' }, // Lima Cítrico
+      { id: 8,  base: '#EC4899', light: '#F472B6', dark: '#BE185D', glow: '#F472B6' }, // Framboesa Neon
+      { id: 9,  base: '#EA580C', light: '#FB923C', dark: '#9A3412', glow: '#F97316' }, // Terracota Brasa
+      { id: 10, base: '#DC2626', light: '#F87171', dark: '#991B1B', glow: '#EF4444' }, // Carmim Arcade
+      { id: 11, base: '#0284C7', light: '#38BDF8', dark: '#075985', glow: '#0EA5E9' }, // Azul Cobalto
+      { id: 12, base: '#EAB308', light: '#FEF08A', dark: '#A16207', glow: '#FDE047' }, // Canário Solar
+      { id: 13, base: '#059669', light: '#6EE7B7', dark: '#065F46', glow: '#10B981' }  // Pinho Vivo
     ];
 
     const DEAD_COLOR = { base: '#64748B', light: '#94A3B8', dark: '#475569', glow: '#94A3B8' };
 
+    // Catálogo estritamente conexo (ZERO blocos com espaços vazios entre células).
+    // Bloco único (1x1) configurado como RARO (w: 0.45 -> < 0.3% de chance).
     const SHAPES = [
-      { m: [[1]], w: 5 },
-      { m: [[1, 1]], w: 8 },
-      { m: [[1], [1]], w: 8 },
+      { m: [[1]], w: 0.45 },
+      { m: [[1, 1]], w: 7.5 },
+      { m: [[1], [1]], w: 7.5 },
       { m: [[1, 1, 1]], w: 9 },
       { m: [[1], [1], [1]], w: 9 },
       { m: [[1, 1], [1, 0]], w: 8 },
@@ -1003,27 +1125,27 @@
       { m: [[1, 0], [1, 1]], w: 8 },
       { m: [[0, 1], [1, 1]], w: 8 },
       { m: [[1, 1], [1, 1]], w: 11 },
-      { m: [[1, 1, 1, 1]], w: 7 },
-      { m: [[1], [1], [1], [1]], w: 7 },
+      { m: [[1, 1, 1, 1]], w: 7.5 },
+      { m: [[1], [1], [1], [1]], w: 7.5 },
       { m: [[1, 1, 1], [0, 1, 0]], w: 7 },
       { m: [[0, 1, 0], [1, 1, 1]], w: 7 },
       { m: [[1, 0], [1, 1], [1, 0]], w: 7 },
       { m: [[0, 1], [1, 1], [0, 1]], w: 7 },
-      { m: [[1, 1, 0], [0, 1, 1]], w: 5 },
-      { m: [[0, 1, 1], [1, 1, 0]], w: 5 },
-      { m: [[1, 0], [1, 0], [1, 1]], w: 6 },
-      { m: [[0, 1], [0, 1], [1, 1]], w: 6 },
-      { m: [[1, 1, 1], [1, 0, 0]], w: 6 },
-      { m: [[1, 1, 1], [0, 0, 1]], w: 6 },
-      { m: [[1, 1, 1, 1, 1]], w: 4 },
-      { m: [[1], [1], [1], [1], [1]], w: 4 },
-      { m: [[1, 1, 1], [1, 0, 0], [1, 0, 0]], w: 5 },
-      { m: [[1, 1, 1], [0, 0, 1], [0, 0, 1]], w: 5 },
-      { m: [[1, 0, 0], [1, 0, 0], [1, 1, 1]], w: 5 },
-      { m: [[0, 0, 1], [0, 0, 1], [1, 1, 1]], w: 5 },
-      { m: [[1, 1, 1], [1, 1, 1]], w: 4 },
-      { m: [[1, 1], [1, 1], [1, 1]], w: 4 },
-      { m: [[1, 1, 1], [1, 1, 1], [1, 1, 1]], w: 4 }
+      { m: [[1, 1, 0], [0, 1, 1]], w: 5.5 },
+      { m: [[0, 1, 1], [1, 1, 0]], w: 5.5 },
+      { m: [[1, 0], [1, 0], [1, 1]], w: 6.5 },
+      { m: [[0, 1], [0, 1], [1, 1]], w: 6.5 },
+      { m: [[1, 1, 1], [1, 0, 0]], w: 6.5 },
+      { m: [[1, 1, 1], [0, 0, 1]], w: 6.5 },
+      { m: [[1, 1, 1, 1, 1]], w: 4.5 },
+      { m: [[1], [1], [1], [1], [1]], w: 4.5 },
+      { m: [[1, 1, 1], [1, 0, 0], [1, 0, 0]], w: 5.5 },
+      { m: [[1, 1, 1], [0, 0, 1], [0, 0, 1]], w: 5.5 },
+      { m: [[1, 0, 0], [1, 0, 0], [1, 1, 1]], w: 5.5 },
+      { m: [[0, 0, 1], [0, 0, 1], [1, 1, 1]], w: 5.5 },
+      { m: [[1, 1, 1], [1, 1, 1]], w: 4.5 },
+      { m: [[1, 1], [1, 1], [1, 1]], w: 4.5 },
+      { m: [[1, 1, 1], [1, 1, 1], [1, 1, 1]], w: 4.5 }
     ];
 
     /* =========================================================================
@@ -1298,7 +1420,7 @@
           ctx.lineTo(inner[1][0], inner[1][1]);
           ctx.stroke();
 
-        } else {
+        } else if (style === 'capsule') {
           const rCap = s * 0.28;
           roundRectPath(ctx, pad, pad, w, w, rCap);
           const gCap = ctx.createLinearGradient(0, pad, 0, pad + w);
@@ -1336,6 +1458,200 @@
           ctx.lineWidth = Math.max(1, s * 0.03);
           roundRectPath(ctx, pad + 1, pad + 1, w - 2, w - 2, rCap);
           ctx.stroke();
+
+        } else if (style === 'brushed') {
+          // FORJA COBRE: Metal escovado industrial com chanfro metálico e 4 micro-rebites
+          const rMet = Math.max(2, s * 0.12);
+          roundRectPath(ctx, pad, pad, w, w, rMet);
+          const gMet = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+          gMet.addColorStop(0, pal.light);
+          gMet.addColorStop(0.35, pal.base);
+          gMet.addColorStop(0.65, pal.dark);
+          gMet.addColorStop(1, pal.base);
+          ctx.fillStyle = gMet;
+          ctx.fill();
+
+          // Linhas sutis de escovação metálica
+          ctx.save();
+          roundRectPath(ctx, pad + 2, pad + 2, w - 4, w - 4, rMet * 0.8);
+          ctx.clip();
+          const lineStep = Math.max(2, Math.round(s * 0.08));
+          for (let y = pad + 2; y < pad + w - 2; y += lineStep) {
+            ctx.fillStyle = (y % (lineStep * 2) === 0) ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.12)';
+            ctx.fillRect(pad, y, w, 1);
+          }
+          ctx.restore();
+
+          // Placa interna chanfrada
+          const ins = w * 0.14;
+          roundRectPath(ctx, pad + ins, pad + ins, w - ins * 2, w - ins * 2, rMet * 0.5);
+          ctx.strokeStyle = 'rgba(255,255,255,0.32)';
+          ctx.lineWidth = Math.max(1, s * 0.028);
+          ctx.stroke();
+
+          // 4 micro-rebites nos cantos
+          const rv = Math.max(1.5, s * 0.042);
+          const ro = pad + w * 0.17;
+          const rivets = [
+            [ro, ro], [pad + w - (ro - pad), ro],
+            [ro, pad + w - (ro - pad)], [pad + w - (ro - pad), pad + w - (ro - pad)]
+          ];
+          for (const [rx, ry] of rivets) {
+            ctx.fillStyle = 'rgba(0,0,0,0.35)';
+            ctx.beginPath();
+            ctx.arc(rx + 0.6, ry + 0.8, rv, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(255,255,255,0.62)';
+            ctx.beginPath();
+            ctx.arc(rx, ry, rv * 0.82, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+        } else if (style === 'origami') {
+          // PAPEL ORIGAMI: 4 faces triangulares dobradas convergindo no centro
+          const x0 = pad, y0 = pad, x1 = pad + w, y1 = pad + w;
+          const cx = s * 0.5, cy = s * 0.5;
+          const rPap = Math.max(2, s * 0.1);
+
+          ctx.save();
+          roundRectPath(ctx, x0, y0, w, w, rPap);
+          ctx.clip();
+
+          // Triângulo superior (mais claro)
+          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y0); ctx.lineTo(cx, cy); ctx.closePath();
+          ctx.fillStyle = pal.light; ctx.fill();
+          // Triângulo esquerdo (médio-claro)
+          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(cx, cy); ctx.lineTo(x0, y1); ctx.closePath();
+          ctx.fillStyle = pal.base; ctx.fill();
+          // Triângulo direito (médio-escuro)
+          ctx.beginPath(); ctx.moveTo(x1, y0); ctx.lineTo(x1, y1); ctx.lineTo(cx, cy); ctx.closePath();
+          ctx.fillStyle = pal.base; ctx.fill();
+          ctx.fillStyle = 'rgba(0,0,0,0.12)'; ctx.fill();
+          // Triângulo inferior (sombra)
+          ctx.beginPath(); ctx.moveTo(x0, y1); ctx.lineTo(cx, cy); ctx.lineTo(x1, y1); ctx.closePath();
+          ctx.fillStyle = pal.dark; ctx.fill();
+
+          // Vincos brancos sutis nas diagonais
+          ctx.strokeStyle = 'rgba(255,255,255,0.42)';
+          ctx.lineWidth = Math.max(1, s * 0.025);
+          ctx.beginPath();
+          ctx.moveTo(x0, y0); ctx.lineTo(x1, y1);
+          ctx.moveTo(x1, y0); ctx.lineTo(x0, y1);
+          ctx.stroke();
+          ctx.restore();
+
+          ctx.strokeStyle = 'rgba(0,0,0,0.18)';
+          ctx.lineWidth = Math.max(1, s * 0.026);
+          roundRectPath(ctx, x0 + 0.5, y0 + 0.5, w - 1, w - 1, rPap);
+          ctx.stroke();
+
+        } else if (style === 'frost') {
+          // GELO ÁRTICO: Bloco cristalino translúcido com fraturas diagonais e brilho glacial
+          const rIce = Math.max(3, s * 0.2);
+          roundRectPath(ctx, pad, pad, w, w, rIce);
+          const gIce = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+          gIce.addColorStop(0, '#FFFFFF');
+          gIce.addColorStop(0.22, pal.light);
+          gIce.addColorStop(0.68, pal.base);
+          gIce.addColorStop(1, pal.dark);
+          ctx.fillStyle = gIce;
+          ctx.fill();
+
+          ctx.save();
+          roundRectPath(ctx, pad + 2, pad + 2, w - 4, w - 4, rIce * 0.85);
+          ctx.clip();
+          // Faceta diagonal de refração glacial
+          ctx.fillStyle = 'rgba(255,255,255,0.28)';
+          ctx.beginPath();
+          ctx.moveTo(pad, pad + w * 0.55);
+          ctx.lineTo(pad + w * 0.65, pad);
+          ctx.lineTo(pad + w, pad);
+          ctx.lineTo(pad + w * 0.35, pad + w);
+          ctx.lineTo(pad, pad + w);
+          ctx.closePath();
+          ctx.fill();
+
+          // Micro-fratura cristalina
+          ctx.strokeStyle = 'rgba(255,255,255,0.62)';
+          ctx.lineWidth = Math.max(1, s * 0.026);
+          ctx.beginPath();
+          ctx.moveTo(pad + w * 0.2, pad + w * 0.24);
+          ctx.lineTo(pad + w * 0.48, pad + w * 0.45);
+          ctx.lineTo(pad + w * 0.78, pad + w * 0.32);
+          ctx.stroke();
+          ctx.restore();
+
+          ctx.strokeStyle = 'rgba(255,255,255,0.72)';
+          ctx.lineWidth = Math.max(1.2, s * 0.036);
+          roundRectPath(ctx, pad + 1.5, pad + 1.5, w - 3, w - 3, rIce * 0.9);
+          ctx.stroke();
+
+        } else if (style === 'circuit') {
+          // CIRCUITO PCB: Microchip eletrônico com trilhas impressas e pad central
+          const rPcb = Math.max(2, s * 0.14);
+          roundRectPath(ctx, pad, pad, w, w, rPcb);
+          ctx.fillStyle = pal.dark;
+          ctx.fill();
+
+          roundRectPath(ctx, pad + s * 0.05, pad + s * 0.05, w - s * 0.1, w - s * 0.1, rPcb * 0.75);
+          const gPcb = ctx.createLinearGradient(0, pad, 0, pad + w);
+          gPcb.addColorStop(0, pal.base);
+          gPcb.addColorStop(1, pal.dark);
+          ctx.fillStyle = gPcb;
+          ctx.fill();
+
+          // Trilhas metálicas internas
+          const cx = s * 0.5, cy = s * 0.5;
+          ctx.strokeStyle = pal.light;
+          ctx.lineWidth = Math.max(1.2, s * 0.034);
+          ctx.beginPath();
+          ctx.moveTo(pad + w * 0.16, cy); ctx.lineTo(pad + w * 0.84, cy);
+          ctx.moveTo(cx, pad + w * 0.16); ctx.lineTo(cx, pad + w * 0.84);
+          ctx.stroke();
+
+          // Pad central estilo chip
+          const chipS = w * 0.36;
+          roundRectPath(ctx, cx - chipS * 0.5, cy - chipS * 0.5, chipS, chipS, chipS * 0.22);
+          ctx.fillStyle = pal.light;
+          ctx.fill();
+          roundRectPath(ctx, cx - chipS * 0.25, cy - chipS * 0.25, chipS * 0.5, chipS * 0.5, chipS * 0.14);
+          ctx.fillStyle = pal.dark;
+          ctx.fill();
+
+          ctx.strokeStyle = 'rgba(255,255,255,0.34)';
+          ctx.lineWidth = Math.max(1, s * 0.025);
+          roundRectPath(ctx, pad + 1, pad + 1, w - 2, w - 2, rPcb);
+          ctx.stroke();
+
+        } else {
+          // ATELIÊ MÁRMORE: Pedra polida arquitetônica com moldura dupla e brilho acetinado
+          const rMar = Math.max(3, s * 0.16);
+          roundRectPath(ctx, pad, pad, w, w, rMar);
+          const gMar = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+          gMar.addColorStop(0, pal.light);
+          gMar.addColorStop(0.5, pal.base);
+          gMar.addColorStop(1, pal.dark);
+          ctx.fillStyle = gMar;
+          ctx.fill();
+
+          // Moldura arquitetônica em baixo-relevo
+          const m1 = w * 0.13;
+          roundRectPath(ctx, pad + m1, pad + m1, w - m1 * 2, w - m1 * 2, rMar * 0.65);
+          ctx.strokeStyle = 'rgba(255,255,255,0.42)';
+          ctx.lineWidth = Math.max(1.2, s * 0.035);
+          ctx.stroke();
+
+          // Veio diagonal acetinado
+          ctx.save();
+          roundRectPath(ctx, pad + m1, pad + m1, w - m1 * 2, w - m1 * 2, rMar * 0.65);
+          ctx.clip();
+          ctx.strokeStyle = 'rgba(255,255,255,0.28)';
+          ctx.lineWidth = Math.max(2, s * 0.08);
+          ctx.beginPath();
+          ctx.moveTo(pad, pad + w * 0.72);
+          ctx.quadraticCurveTo(s * 0.48, s * 0.45, pad + w, pad + w * 0.22);
+          ctx.stroke();
+          ctx.restore();
         }
 
         return c;
@@ -2207,9 +2523,12 @@
         const blocks = countMatrixBlocks(s.m);
         const span = Math.max(s.m.length, s.m[0].length);
         let mult = 1;
-        if (blocks <= 2) {
-          // Peças triviais (1x1, 1x2) ficam mais raras conforme o jogo avança
-          mult = 1 - difficulty * 0.55;
+        if (blocks === 1) {
+          // Bloco único 1x1 é propositalmente muito raro e diminui ainda mais com o progresso
+          return Math.max(0.15, s.w * (1 - difficulty * 0.7));
+        } else if (blocks === 2) {
+          // Peças 1x2 ficam mais raras conforme o jogo avança
+          mult = 1 - difficulty * 0.5;
         } else if (blocks === 3) {
           mult = 1 - difficulty * 0.15;
         } else if (blocks === 4) {
@@ -2270,8 +2589,8 @@
         const matrix = SHAPES[i].m;
         const blocks = countMatrixBlocks(matrix);
 
-        // Em dificuldades maiores, evita entregar o bloco 1x1 trivial como recompensa fácil
-        if (difficulty > 0.3 && blocks === 1) continue;
+        // Bloco único 1x1 nunca é entregue como recompensa automática de combo (mantém raridade)
+        if (blocks === 1) continue;
 
         let bestForShape = null;
         for (let r = 0; r < BOARD_SIZE; r++) {
@@ -2365,11 +2684,14 @@
         };
       }
 
-      // Regra justa anti-softlock no início/meio (no late game, permite derrota legítima se não houver espaço)
+      // Regra justa anti-softlock no início/meio (evita 1x1 se qualquer outra peça couber)
       if (!board.hasAnyValidMove(slots) && difficulty < 0.35) {
-        const fitting = SHAPES.filter(s => board.canFitMatrixAnywhere(s.m));
-        if (fitting.length > 0) {
-          const chosen = fitting[Math.floor(Math.random() * fitting.length)];
+        const fittingMulti = SHAPES.filter(s => countMatrixBlocks(s.m) > 1 && board.canFitMatrixAnywhere(s.m));
+        const fittingPool = fittingMulti.length > 0
+          ? fittingMulti
+          : SHAPES.filter(s => board.canFitMatrixAnywhere(s.m));
+        if (fittingPool.length > 0) {
+          const chosen = fittingPool[Math.floor(Math.random() * fittingPool.length)];
           slots[Math.floor(Math.random() * 3)].matrix = chosen.m;
         }
       }
@@ -2528,6 +2850,9 @@
         this.shakeMag = 0;
         this.hitstop = 0;
         this.time = 0;
+        this.boardRimFlash = 0;
+        this.boardRimColor = '#FF551A';
+        this.previewSparkTimer = 0;
 
         this.drag = {
           active: false,
@@ -2558,18 +2883,18 @@
         this.trayH = 120;
         this.slotCenters = [0, 0, 0];
 
-        this.particles = Array.from({ length: 140 }, () => ({
+        this.particles = Array.from({ length: 200 }, () => ({
           active: false, x: 0, y: 0, vx: 0, vy: 0, size: 6,
-          life: 0, maxLife: 1, color: '#fff', kind: 0, rot: 0, vrot: 0, starIdx: 0
+          life: 0, maxLife: 1, color: '#fff', kind: 0, rot: 0, vrot: 0, starIdx: 0, gravity: 420
         }));
-        this.lasers = Array.from({ length: 16 }, () => ({
-          active: false, isRow: true, index: 0, color: '#fff', life: 0, maxLife: 0.34
+        this.lasers = Array.from({ length: 20 }, () => ({
+          active: false, isRow: true, index: 0, color: '#fff', life: 0, maxLife: 0.38
         }));
-        this.flashes = Array.from({ length: 16 }, () => ({
-          active: false, isRow: true, index: 0, color: '#fff', life: 0, maxLife: 0.28
+        this.flashes = Array.from({ length: 20 }, () => ({
+          active: false, isRow: true, index: 0, color: '#fff', life: 0, maxLife: 0.32
         }));
-        this.shockwaves = Array.from({ length: 6 }, () => ({
-          active: false, x: 0, y: 0, maxR: 180, color: '#fff', life: 0, maxLife: 0.45
+        this.shockwaves = Array.from({ length: 10 }, () => ({
+          active: false, x: 0, y: 0, maxR: 180, color: '#fff', life: 0, maxLife: 0.46, delay: 0
         }));
         this.popups = Array.from({ length: 14 }, () => ({
           active: false, x: 0, y: 0, text: '', badge: '', badgeColor: '#FF551A',
@@ -3095,13 +3420,28 @@
           }
 
           const accent = BLOCK_PALETTE[piece.colorId].glow;
+          this.boardRimFlash = Math.min(1, 0.62 + totalLines * 0.16 + this.combo * 0.08);
+          this.boardRimColor = (totalLines >= 2 || this.combo >= 3) ? '#FDE047' : accent;
+
           for (const r of res.clearedRows) {
             this.spawnLaser(true, r, accent);
             this.spawnFlash(true, r, accent);
+            this.spawnLineStreaks(true, r, accent, 12 + totalLines * 3);
           }
           for (const c of res.clearedCols) {
             this.spawnLaser(false, c, accent);
             this.spawnFlash(false, c, accent);
+            this.spawnLineStreaks(false, c, accent, 12 + totalLines * 3);
+          }
+
+          // Explosão extra em cada ponto de cruzamento linha × coluna
+          for (const r of res.clearedRows) {
+            for (const c of res.clearedCols) {
+              const xPt = this.cellCenter(r, c);
+              this.spawnShockwave(xPt.x, xPt.y, '#FFFFFF', 120, 0);
+              this.spawnShockwave(xPt.x, xPt.y, accent, 185, 0.07);
+              this.spawnBurst(xPt.x, xPt.y, piece.colorId, 12);
+            }
           }
 
           res.clearedCells.sort((a, b) => {
@@ -3124,7 +3464,10 @@
           });
 
           if (totalLines >= 2 || this.combo >= 2) {
-            this.spawnShockwave(centerPt.x, centerPt.y, accent, 140 + this.combo * 22);
+            this.spawnShockwave(centerPt.x, centerPt.y, accent, 150 + this.combo * 24, 0);
+            this.spawnShockwave(centerPt.x, centerPt.y, '#FFFFFF', 110 + this.combo * 16, 0.065);
+          } else {
+            this.spawnShockwave(centerPt.x, centerPt.y, accent, 115, 0);
           }
           if (this.combo >= 2) {
             const label = this.combo >= 5 ? `LENDÁRIO x${this.combo}!`
@@ -3267,21 +3610,88 @@
           const p = this.particles[i];
           if (p.active) continue;
           const ang = Math.random() * Math.PI * 2;
-          const spd = 70 + Math.random() * 190;
+          const spd = 85 + Math.random() * 210;
           p.active = true;
           p.x = x;
           p.y = y;
           p.vx = Math.cos(ang) * spd;
-          p.vy = Math.sin(ang) * spd - 45;
+          p.vy = Math.sin(ang) * spd - 50;
           p.size = 4.5 + Math.random() * 5.5;
           p.life = 0;
-          p.maxLife = 0.36 + Math.random() * 0.34;
+          p.maxLife = 0.38 + Math.random() * 0.34;
           p.color = Math.random() < 0.45 ? pal.light : pal.base;
-          p.kind = Math.random() < 0.35 ? 1 : 0;
+          p.kind = Math.random() < 0.38 ? 1 : 0;
           p.rot = Math.random() * Math.PI;
           p.vrot = (Math.random() - 0.5) * 10;
           p.starIdx = (colorId + 2) % this.sprites.starSprites.length;
+          p.gravity = 420;
           spawned++;
+        }
+      }
+
+      // Faíscas direcionais (streaks) que disparam perpendicularmente à linha/coluna quebrada
+      spawnLineStreaks(isRow, index, color, count = 14) {
+        const step = this.cellPx + this.gapPx;
+        let spawned = 0;
+        for (let i = 0; i < this.particles.length && spawned < count; i++) {
+          const p = this.particles[i];
+          if (p.active) continue;
+          const along = Math.random() * (this.boardPx - this.padPx * 2);
+          const dir = Math.random() < 0.5 ? -1 : 1;
+          const spd = 160 + Math.random() * 240;
+          p.active = true;
+          if (isRow) {
+            p.x = this.boardX + this.padPx + along;
+            p.y = this.boardY + this.padPx + index * step + this.cellPx * 0.5;
+            p.vx = (Math.random() - 0.5) * 70;
+            p.vy = dir * spd;
+          } else {
+            p.x = this.boardX + this.padPx + index * step + this.cellPx * 0.5;
+            p.y = this.boardY + this.padPx + along;
+            p.vx = dir * spd;
+            p.vy = (Math.random() - 0.5) * 70;
+          }
+          p.size = 10 + Math.random() * 10;
+          p.life = 0;
+          p.maxLife = 0.24 + Math.random() * 0.18;
+          p.color = Math.random() < 0.35 ? '#FFFFFF' : color;
+          p.kind = 2; // Streak luminoso
+          p.rot = Math.atan2(p.vy, p.vx);
+          p.vrot = 0;
+          p.gravity = 0;
+          spawned++;
+        }
+      }
+
+      // Micro-faísca de antecipação ao longo da linha/coluna que PODE ser quebrada
+      spawnPreviewSpark(isRow, index, color) {
+        const step = this.cellPx + this.gapPx;
+        for (let i = 0; i < this.particles.length; i++) {
+          const p = this.particles[i];
+          if (p.active) continue;
+          const along = Math.random() * (this.boardPx - this.padPx * 2);
+          p.active = true;
+          if (isRow) {
+            p.x = this.boardX + this.padPx + along;
+            p.y = this.boardY + this.padPx + index * step + (Math.random() * this.cellPx);
+            p.vx = (Math.random() - 0.5) * 28;
+            p.vy = -28 - Math.random() * 34;
+          } else {
+            p.x = this.boardX + this.padPx + index * step + (Math.random() * this.cellPx);
+            p.y = this.boardY + this.padPx + along;
+            p.vx = (Math.random() - 0.5) * 38;
+            p.vy = -22 - Math.random() * 28;
+          }
+          p.size = 3.2 + Math.random() * 2.5;
+          p.life = 0;
+          p.maxLife = 0.26 + Math.random() * 0.16;
+          p.color = Math.random() < 0.5 ? '#FFFFFF' : color;
+          p.kind = 1;
+          p.rot = Math.random() * Math.PI;
+          p.vrot = 6;
+          p.starIdx = Math.random() < 0.5 ? 0 : 1;
+          p.gravity = 0;
+          return;
         }
       }
 
@@ -3313,7 +3723,7 @@
         }
       }
 
-      spawnShockwave(x, y, color, maxR) {
+      spawnShockwave(x, y, color, maxR, delay = 0) {
         for (const s of this.shockwaves) {
           if (!s.active) {
             s.active = true;
@@ -3323,6 +3733,7 @@
             s.color = color;
             s.life = 0;
             s.maxLife = 0.46;
+            s.delay = delay;
             return;
           }
         }
@@ -3453,11 +3864,28 @@
           }
         }
 
+        if (this.boardRimFlash > 0) {
+          this.boardRimFlash = Math.max(0, this.boardRimFlash - dt * 3.1);
+        }
+
+        // Emite micro-faíscas contínuas quando o bloco arrastado pode quebrar linha/coluna
+        if (this.drag.active && this.drag.canDrop && (this.drag.predictedRows.length > 0 || this.drag.predictedCols.length > 0)) {
+          this.previewSparkTimer -= dt;
+          if (this.previewSparkTimer <= 0) {
+            this.previewSparkTimer = 0.075;
+            const sparkCol = BLOCK_PALETTE[this.drag.piece.colorId].glow;
+            for (const r of this.drag.predictedRows) this.spawnPreviewSpark(true, r, sparkCol);
+            for (const c of this.drag.predictedCols) this.spawnPreviewSpark(false, c, sparkCol);
+          }
+        } else {
+          this.previewSparkTimer = 0;
+        }
+
         for (const p of this.particles) {
           if (!p.active) continue;
           p.life += dt;
           if (p.life >= p.maxLife) { p.active = false; continue; }
-          p.vy += 420 * dt;
+          p.vy += (p.gravity || 0) * dt;
           p.x += p.vx * dt;
           p.y += p.vy * dt;
           p.rot += p.vrot * dt;
@@ -3477,6 +3905,7 @@
 
         for (const s of this.shockwaves) {
           if (!s.active) continue;
+          if (s.delay > 0) { s.delay -= dt; continue; }
           s.life += dt;
           if (s.life >= s.maxLife) s.active = false;
         }
@@ -3544,30 +3973,125 @@
           ctx.restore();
         }
 
-        const step = this.cellPx + this.gapPx;
-        if (this.drag.active && this.drag.canDrop) {
-          const predColor = BLOCK_PALETTE[this.drag.piece.colorId].glow;
+        // Pulso de impacto na moldura do tabuleiro ao quebrar linhas
+        if (this.boardRimFlash > 0) {
           ctx.save();
-          ctx.fillStyle = predColor;
-          ctx.globalAlpha = 0.2 + Math.sin(this.time * 12) * 0.07;
+          ctx.globalCompositeOperation = 'lighter';
+          ctx.strokeStyle = this.boardRimColor;
+          ctx.globalAlpha = this.boardRimFlash * 0.85;
+          ctx.lineWidth = 3 + this.boardRimFlash * 4.5;
+          roundRectPath(ctx, this.boardX - 2, this.boardY - 2, this.boardPx + 4, this.boardPx + 4, 18);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        const step = this.cellPx + this.gapPx;
+        const innerSpan = this.boardPx - this.padPx * 2;
+        const hasPredClear = this.drag.active && this.drag.canDrop &&
+          (this.drag.predictedRows.length > 0 || this.drag.predictedCols.length > 0);
+        const predMulti = hasPredClear && (this.drag.predictedRows.length + this.drag.predictedCols.length >= 2);
+        const predPulse = 0.5 + 0.5 * Math.sin(this.time * 13);
+
+        // 2. Efeitos de antecipação quando um bloco AINDA NÃO ADICIONADO vai quebrar linha/coluna
+        if (hasPredClear) {
+          const predPal = BLOCK_PALETTE[this.drag.piece.colorId];
+          const predColor = predMulti ? '#FDE047' : predPal.glow;
+          const sweepPos = ((this.time * 1.65) % 1.35) - 0.18;
+
+          ctx.save();
+          // Faixa luminosa + varredura de energia + borda + colchetes [ ] nas pontas
           for (const r of this.drag.predictedRows) {
             const ry = this.boardY + this.padPx + r * step;
-            roundRectPath(ctx, this.boardX + this.padPx, ry, this.boardPx - this.padPx * 2, this.cellPx, 8);
+            const rx = this.boardX + this.padPx;
+
+            ctx.fillStyle = predColor;
+            ctx.globalAlpha = 0.16 + predPulse * 0.14;
+            roundRectPath(ctx, rx - 2, ry - 2, innerSpan + 4, this.cellPx + 4, 9);
             ctx.fill();
+
+            // Feixe de varredura deslizante
+            ctx.save();
+            roundRectPath(ctx, rx, ry, innerSpan, this.cellPx, 8);
+            ctx.clip();
+            ctx.globalCompositeOperation = 'lighter';
+            const sxPos = rx + sweepPos * innerSpan;
+            const swW = this.cellPx * 2.1;
+            const gSweep = ctx.createLinearGradient(sxPos - swW * 0.5, 0, sxPos + swW * 0.5, 0);
+            gSweep.addColorStop(0, 'rgba(255,255,255,0)');
+            gSweep.addColorStop(0.5, 'rgba(255,255,255,0.45)');
+            gSweep.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = gSweep;
+            ctx.globalAlpha = 0.85;
+            ctx.fillRect(sxPos - swW * 0.5, ry, swW, this.cellPx);
+            ctx.restore();
+
+            // Contorno energizado
+            ctx.strokeStyle = predColor;
+            ctx.globalAlpha = 0.65 + predPulse * 0.35;
+            ctx.lineWidth = 2.5;
+            roundRectPath(ctx, rx - 1.5, ry - 1.5, innerSpan + 3, this.cellPx + 3, 9);
+            ctx.stroke();
+
+            // Colchetes de mira nas pontas esquerda e direita
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 2.5;
+            const bk = 7;
+            ctx.beginPath();
+            ctx.moveTo(rx + bk, ry - 3); ctx.lineTo(rx - 3, ry - 3); ctx.lineTo(rx - 3, ry + this.cellPx + 3); ctx.lineTo(rx + bk, ry + this.cellPx + 3);
+            ctx.moveTo(rx + innerSpan - bk, ry - 3); ctx.lineTo(rx + innerSpan + 3, ry - 3); ctx.lineTo(rx + innerSpan + 3, ry + this.cellPx + 3); ctx.lineTo(rx + innerSpan - bk, ry + this.cellPx + 3);
+            ctx.stroke();
           }
+
           for (const c of this.drag.predictedCols) {
             const cx = this.boardX + this.padPx + c * step;
-            roundRectPath(ctx, cx, this.boardY + this.padPx, this.cellPx, this.boardPx - this.padPx * 2, 8);
+            const cy = this.boardY + this.padPx;
+
+            ctx.fillStyle = predColor;
+            ctx.globalAlpha = 0.16 + predPulse * 0.14;
+            roundRectPath(ctx, cx - 2, cy - 2, this.cellPx + 4, innerSpan + 4, 9);
             ctx.fill();
+
+            ctx.save();
+            roundRectPath(ctx, cx, cy, this.cellPx, innerSpan, 8);
+            ctx.clip();
+            ctx.globalCompositeOperation = 'lighter';
+            const syPos = cy + sweepPos * innerSpan;
+            const swH = this.cellPx * 2.1;
+            const gSweep = ctx.createLinearGradient(0, syPos - swH * 0.5, 0, syPos + swH * 0.5);
+            gSweep.addColorStop(0, 'rgba(255,255,255,0)');
+            gSweep.addColorStop(0.5, 'rgba(255,255,255,0.45)');
+            gSweep.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = gSweep;
+            ctx.globalAlpha = 0.85;
+            ctx.fillRect(cx, syPos - swH * 0.5, this.cellPx, swH);
+            ctx.restore();
+
+            ctx.strokeStyle = predColor;
+            ctx.globalAlpha = 0.65 + predPulse * 0.35;
+            ctx.lineWidth = 2.5;
+            roundRectPath(ctx, cx - 1.5, cy - 1.5, this.cellPx + 3, innerSpan + 3, 9);
+            ctx.stroke();
+
+            ctx.strokeStyle = '#FFFFFF';
+            ctx.lineWidth = 2.5;
+            const bk = 7;
+            ctx.beginPath();
+            ctx.moveTo(cx - 3, cy + bk); ctx.lineTo(cx - 3, cy - 3); ctx.lineTo(cx + this.cellPx + 3, cy - 3); ctx.lineTo(cx + this.cellPx + 3, cy + bk);
+            ctx.moveTo(cx - 3, cy + innerSpan - bk); ctx.lineTo(cx - 3, cy + innerSpan + 3); ctx.lineTo(cx + this.cellPx + 3, cy + innerSpan + 3); ctx.lineTo(cx + this.cellPx + 3, cy + innerSpan - bk);
+            ctx.stroke();
           }
           ctx.restore();
         }
 
         const waveRad = this.waveTime * 19;
         for (let r = 0; r < BOARD_SIZE; r++) {
+          const rowPredicted = hasPredClear && this.drag.predictedRows.includes(r);
           for (let c = 0; c < BOARD_SIZE; c++) {
             const colorId = this.board.grid[r][c];
             if (colorId === null) continue;
+
+            const colPredicted = hasPredClear && this.drag.predictedCols.includes(c);
+            const isPredictedCell = rowPredicted || colPredicted;
 
             const x = this.boardX + this.padPx + c * step;
             const y = this.boardY + this.padPx + r * step;
@@ -3585,21 +4109,24 @@
 
             const pop = this.cellPop[r][c];
             const squash = pop > 0 ? Math.sin(pop * Math.PI) * 0.14 : 0;
-            const scaleX = 1 + squash + wavePop;
-            const scaleY = 1 - squash * 0.65 + wavePop;
+            const predBreath = isPredictedCell ? (0.04 + predPulse * 0.05) : 0;
+            const scaleX = 1 + squash + wavePop + predBreath;
+            const scaleY = 1 - squash * 0.65 + wavePop + predBreath;
 
             const deadPhase = this.gameOver && ((r + c) / 14 <= this.gameOverAnim);
+            // Blocos da linha prestes a quebrar brilham com a cor da peça arrastada
+            const displayColorId = (isPredictedCell && !deadPhase) ? this.drag.piece.colorId : colorId;
             const sprite = deadPhase
               ? this.sprites.deadBlocks[useWorld]
-              : this.sprites.blocks[useWorld][colorId];
+              : this.sprites.blocks[useWorld][displayColorId];
 
-            if (this.combo >= 3 && !deadPhase) {
-              const glow = this.sprites.glows[colorId];
+            if ((this.combo >= 3 || isPredictedCell) && !deadPhase) {
+              const glow = this.sprites.glows[displayColorId];
               if (glow) {
                 ctx.save();
                 ctx.globalCompositeOperation = 'lighter';
-                ctx.globalAlpha = 0.22;
-                const gSize = this.cellPx * 1.55;
+                ctx.globalAlpha = isPredictedCell ? (0.28 + predPulse * 0.25) : 0.22;
+                const gSize = this.cellPx * (isPredictedCell ? 1.7 : 1.55);
                 ctx.drawImage(glow, x + (this.cellPx - gSize) * 0.5, y + (this.cellPx - gSize) * 0.5, gSize, gSize);
                 ctx.restore();
               }
@@ -3612,7 +4139,36 @@
             } else {
               ctx.drawImage(sprite, x, y, this.cellPx, this.cellPx);
             }
+
+            // Brilho especular pulsante sobre células prestes a explodir
+            if (isPredictedCell && !deadPhase) {
+              ctx.save();
+              ctx.globalCompositeOperation = 'lighter';
+              ctx.fillStyle = '#FFFFFF';
+              ctx.globalAlpha = 0.14 + predPulse * 0.18;
+              roundRectPath(ctx, x + 2, y + 2, this.cellPx - 4, this.cellPx - 4, Math.max(3, this.cellPx * 0.16));
+              ctx.fill();
+              ctx.restore();
+            }
           }
+        }
+
+        // Crosshair pulsante nos pontos de cruzamento linha × coluna previstos
+        if (hasPredClear && this.drag.predictedRows.length > 0 && this.drag.predictedCols.length > 0) {
+          ctx.save();
+          ctx.globalCompositeOperation = 'lighter';
+          for (const r of this.drag.predictedRows) {
+            for (const c of this.drag.predictedCols) {
+              const pt = this.cellCenter(r, c);
+              ctx.strokeStyle = '#FFFFFF';
+              ctx.globalAlpha = 0.65 + predPulse * 0.35;
+              ctx.lineWidth = 2.5;
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, this.cellPx * (0.38 + predPulse * 0.16), 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+          ctx.restore();
         }
 
         for (const d of this.dominoQueue) {
@@ -3623,10 +4179,18 @@
             ctx.drawImage(sprite, x, y, this.cellPx, this.cellPx);
           } else {
             const p = clamp(d.total / 0.14, 0, 1);
-            const sz = this.cellPx * (0.25 + p * 0.9);
+            const sz = this.cellPx * (0.25 + p * 0.92);
             ctx.save();
             ctx.globalAlpha = p;
             ctx.drawImage(sprite, x + (this.cellPx - sz) * 0.5, y + (this.cellPx - sz) * 0.5, sz, sz);
+            // Micro-flash branco incandescente no instante inicial do estouro da célula
+            if (p > 0.55) {
+              ctx.globalCompositeOperation = 'lighter';
+              ctx.fillStyle = '#FFFFFF';
+              ctx.globalAlpha = (p - 0.55) * 1.8;
+              roundRectPath(ctx, x + (this.cellPx - sz) * 0.5, y + (this.cellPx - sz) * 0.5, sz, sz, Math.max(4, sz * 0.2));
+              ctx.fill();
+            }
             ctx.restore();
           }
         }
@@ -3635,13 +4199,19 @@
           const piece = this.drag.piece;
           const sprite = this.sprites.blocks[this.worldIdx][piece.colorId];
           ctx.save();
-          ctx.globalAlpha = 0.38;
+          ctx.globalAlpha = hasPredClear ? (0.56 + predPulse * 0.24) : 0.38;
           for (let r = 0; r < piece.matrix.length; r++) {
             for (let c = 0; c < piece.matrix[0].length; c++) {
               if (!piece.matrix[r][c]) continue;
               const x = this.boardX + this.padPx + (this.drag.snapC + c) * step;
               const y = this.boardY + this.padPx + (this.drag.snapR + r) * step;
               ctx.drawImage(sprite, x, y, this.cellPx, this.cellPx);
+              if (hasPredClear) {
+                ctx.strokeStyle = predMulti ? '#FDE047' : '#FFFFFF';
+                ctx.lineWidth = 2.2;
+                roundRectPath(ctx, x + 1, y + 1, this.cellPx - 2, this.cellPx - 2, Math.max(3, this.cellPx * 0.16));
+                ctx.stroke();
+              }
             }
           }
           ctx.restore();
@@ -3667,25 +4237,34 @@
         for (const l of this.lasers) {
           if (!l.active) continue;
           const t = l.life / l.maxLife;
-          const thick = this.cellPx * (1 - t) * 0.55;
-          ctx.globalAlpha = (1 - t) * 0.9;
-          ctx.fillStyle = '#FFFFFF';
+          const outerThick = this.cellPx * (1 - t) * 1.15;
+          const coreThick = this.cellPx * (1 - t) * 0.48;
           if (l.isRow) {
             const cy = this.boardY + this.padPx + l.index * step + this.cellPx * 0.5;
-            ctx.fillRect(this.boardX + this.padPx, cy - thick * 0.5, this.boardPx - this.padPx * 2, thick);
+            ctx.globalAlpha = (1 - t) * 0.58;
+            ctx.fillStyle = l.color;
+            ctx.fillRect(this.boardX + this.padPx, cy - outerThick * 0.5, this.boardPx - this.padPx * 2, outerThick);
+            ctx.globalAlpha = (1 - t) * 0.96;
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(this.boardX + this.padPx, cy - coreThick * 0.5, this.boardPx - this.padPx * 2, coreThick);
           } else {
             const cx = this.boardX + this.padPx + l.index * step + this.cellPx * 0.5;
-            ctx.fillRect(cx - thick * 0.5, this.boardY + this.padPx, thick, this.boardPx - this.padPx * 2);
+            ctx.globalAlpha = (1 - t) * 0.58;
+            ctx.fillStyle = l.color;
+            ctx.fillRect(cx - outerThick * 0.5, this.boardY + this.padPx, outerThick, this.boardPx - this.padPx * 2);
+            ctx.globalAlpha = (1 - t) * 0.96;
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(cx - coreThick * 0.5, this.boardY + this.padPx, coreThick, this.boardPx - this.padPx * 2);
           }
         }
 
         for (const s of this.shockwaves) {
-          if (!s.active) continue;
+          if (!s.active || s.delay > 0) continue;
           const t = s.life / s.maxLife;
           const ease = 1 - Math.pow(1 - t, 3);
-          ctx.globalAlpha = (1 - t) * 0.72;
+          ctx.globalAlpha = (1 - t) * 0.78;
           ctx.strokeStyle = s.color;
-          ctx.lineWidth = Math.max(1.5, (1 - t) * 7);
+          ctx.lineWidth = Math.max(1.5, (1 - t) * 8);
           ctx.beginPath();
           ctx.arc(s.x, s.y, ease * s.maxR, 0, Math.PI * 2);
           ctx.stroke();
@@ -3762,7 +4341,7 @@
           }
         }
 
-        // 9. Partículas
+        // 9. Partículas (Fragmentos, Estrelas e Streaks de Velocidade)
         for (const p of this.particles) {
           if (!p.active) continue;
           const a = 1 - p.life / p.maxLife;
@@ -3774,6 +4353,13 @@
             const star = this.sprites.starSprites[p.starIdx];
             const sz = p.size * 2.2;
             ctx.drawImage(star, -sz * 0.5, -sz * 0.5, sz, sz);
+          } else if (p.kind === 2) {
+            ctx.globalCompositeOperation = 'lighter';
+            ctx.fillStyle = p.color;
+            const len = p.size * (0.6 + a * 0.9);
+            const th = Math.max(1.8, 3.4 * a);
+            roundRectPath(ctx, -len * 0.5, -th * 0.5, len, th, th * 0.5);
+            ctx.fill();
           } else {
             ctx.fillStyle = p.color;
             ctx.fillRect(-p.size * 0.5, -p.size * 0.5, p.size, p.size);
