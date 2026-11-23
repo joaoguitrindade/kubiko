@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#EFECE6" id="metaThemeColor" />
-  <meta name="description" content="KUBIKO — Puzzle arcade tátil 8x8 com 5 mundos físicos, mascote OLED reativo e 12 assinaturas musicais de streak." />
+  <meta name="description" content="KUBIKO — Puzzle arcade tátil 8x8 com 15 mundos físicos, Modo FEVER x10, mascote OLED reativo e 12 assinaturas musicais de streak." />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -124,6 +124,7 @@
     }
 
     .home-oled-wrap {
+      cursor: pointer;
       width: 108px;
       height: 56px;
       border-radius: 14px;
@@ -144,40 +145,61 @@
     }
 
     .home-title-block {
+      width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
     }
 
     .home-logo {
       font-family: var(--font-display);
       font-weight: 800;
       font-size: clamp(38px, 10vw, 48px);
-      letter-spacing: -0.045em;
       line-height: 1;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 0.14em;
       color: var(--text-primary);
+      margin: 0 auto;
+    }
+
+    .home-logo-word {
+      display: inline-block;
+      letter-spacing: -0.04em;
+      line-height: 0.72;
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
+    }
+
+    @supports not (text-box-trim: trim-both) {
+      .home-logo-word,
+      .brand-logo-word {
+        transform: translateY(0.03em);
+      }
     }
 
     .home-logo-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 44px;
-      height: 44px;
-      padding: 0 8px;
+      width: 0.86em;
+      height: 0.86em;
+      padding: 0;
       border-radius: 11px;
       background: var(--accent);
+      border-bottom: 4px solid var(--accent-lip);
       color: #FFFFFF;
-      font-family: var(--font-display);
-      font-size: clamp(28px, 7.5vw, 35px);
-      font-weight: 800;
-      line-height: 1;
-      box-shadow: 0 4px 0 var(--accent-lip);
-      transform: translateY(-1px);
+      flex-shrink: 0;
+    }
+
+    .home-logo-badge svg {
+      width: 56%;
+      height: 56%;
+      display: block;
     }
 
     .home-sub {
@@ -341,30 +363,40 @@
       font-family: var(--font-display);
       font-weight: 800;
       font-size: clamp(18px, 4.6vw, 22px);
-      letter-spacing: -0.04em;
       line-height: 1;
       display: inline-flex;
       align-items: center;
-      gap: 2px;
+      justify-content: center;
+      gap: 0.14em;
       color: var(--text-primary);
+    }
+
+    .brand-logo-word {
+      display: inline-block;
+      letter-spacing: -0.04em;
+      line-height: 0.72;
+      text-box-trim: trim-both;
+      text-box-edge: cap alphabetic;
     }
 
     .brand-badge {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 24px;
-      height: 24px;
-      padding: 0 5px;
+      width: 0.94em;
+      height: 0.94em;
+      padding: 0;
       border-radius: 6px;
       background: var(--accent);
+      border-bottom: 2px solid var(--accent-lip);
       color: #FFFFFF;
-      font-family: var(--font-display);
-      font-size: clamp(14px, 3.6vw, 17px);
-      font-weight: 800;
-      line-height: 1;
-      box-shadow: 0 2px 0 var(--accent-lip);
-      transform: translateY(-0.5px);
+      flex-shrink: 0;
+    }
+
+    .brand-badge svg {
+      width: 58%;
+      height: 58%;
+      display: block;
     }
 
     .world-pill {
@@ -496,6 +528,7 @@
     }
 
     .oled-bezel {
+      cursor: pointer;
       width: 82px;
       height: 44px;
       border-radius: 10px;
@@ -552,6 +585,49 @@
       min-width: 24px;
       text-align: center;
       font-variant-numeric: tabular-nums;
+    }
+
+
+    /* MODO FEVER ARCO-ÍRIS (x10) */
+    @keyframes feverRainbowShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    body.fever-mode {
+      background: linear-gradient(125deg, #FF3B30, #FF9500, #FFCC00, #34C759, #00C7BE, #007AFF, #AF52DE, #FF2D55);
+      background-size: 320% 320%;
+      animation: feverRainbowShift 3.6s ease infinite;
+    }
+
+    body.fever-mode .hud-deck {
+      border-color: #FFFFFF;
+      box-shadow: 0 4px 0 rgba(0, 0, 0, 0.35);
+    }
+
+    body.fever-mode .world-pill {
+      background: linear-gradient(90deg, #FF3B30, #FF9500, #34C759, #007AFF, #FF2D55);
+      background-size: 260% 100%;
+      animation: feverRainbowShift 2.2s linear infinite;
+      border-color: #FFFFFF;
+      color: #FFFFFF;
+    }
+
+    body.fever-mode .world-dot {
+      background: #FFFFFF !important;
+    }
+
+    body.fever-mode .combo-tag {
+      color: #FF2D55;
+      font-size: 11px;
+    }
+
+    .fuse-seg.fever {
+      background: linear-gradient(90deg, #FF3B30, #FFCC00, #34C759, #00C7BE, #FF2D55);
+      background-size: 200% 100%;
+      animation: feverRainbowShift 1.4s linear infinite;
+      transform: scaleY(1.45);
     }
 
     /* PLAYFIELD */
@@ -729,7 +805,7 @@
       </div>
 
       <div class="home-title-block">
-        <div class="home-logo" aria-label="KUBIKO">KUBIK<span class="home-logo-badge">O</span></div>
+        <div class="home-logo" aria-label="KUBIKO"><span class="home-logo-word">KUBIK</span><span class="home-logo-badge"><svg viewBox="0 0 24 28" aria-hidden="true"><rect x="4" y="3" width="16" height="22" rx="7.5" fill="none" stroke="currentColor" stroke-width="5.2"/></svg></span></div>
         <p class="home-sub">Encaixe blocos, dispare sequências de combos e desbloqueie novos materiais.</p>
       </div>
 
@@ -764,7 +840,7 @@
   <div id="app">
     <header class="topbar">
       <div class="brand-group">
-        <div class="brand-logo" aria-label="KUBIKO">KUBIK<span class="brand-badge">O</span></div>
+        <div class="brand-logo" aria-label="KUBIKO"><span class="brand-logo-word">KUBIK</span><span class="brand-badge"><svg viewBox="0 0 24 28" aria-hidden="true"><rect x="4" y="3" width="16" height="22" rx="7.5" fill="none" stroke="currentColor" stroke-width="5.2"/></svg></span></div>
         <div class="world-pill" aria-live="polite">
           <span class="world-dot" id="worldDot"></span>
           <span id="worldName">ESTÚDIO 1978</span>
@@ -1089,8 +1165,126 @@
         cellInner: '#C6BAA6',
         ambientColor: '#0D9488',
         oledColor: '#2DD4BF'
+      },
+      {
+        id: 'wood',
+        name: 'MADEIRA TECA',
+        style: 'wood',
+        pageBg: '#EAE0D2',
+        surface: '#F7F1E7',
+        surface2: '#DFD0BC',
+        border: '#C5AF93',
+        text: '#2B1D12',
+        muted: '#735943',
+        accent: '#C2410C',
+        accentLip: '#9A3412',
+        keyBg: '#F7F1E7',
+        keyLip: '#C2AA8C',
+        keyText: '#2B1D12',
+        fuseOff: '#CEBC9F',
+        boardBg: '#D2BEA4',
+        boardBorder: '#B39878',
+        cellBg: '#C4AC8E',
+        cellInner: '#B89E7F',
+        ambientColor: '#C2410C',
+        oledColor: '#FB923C'
+      },
+      {
+        id: 'magma',
+        name: 'VULCÃO BASALTO',
+        style: 'magma',
+        pageBg: '#140F0F',
+        surface: '#1E1615',
+        surface2: '#291D1B',
+        border: '#442C27',
+        text: '#FDF2F0',
+        muted: '#B9928B',
+        accent: '#FF4500',
+        accentLip: '#B91C1C',
+        keyBg: '#251B19',
+        keyLip: '#0E0909',
+        keyText: '#FDF2F0',
+        fuseOff: '#3D2723',
+        boardBg: '#1B1312',
+        boardBorder: '#4A2C25',
+        cellBg: '#261A18',
+        cellInner: '#1E1413',
+        ambientColor: '#FF5722',
+        oledColor: '#FF6B35'
+      },
+      {
+        id: 'deco',
+        name: 'OURO ART DÉCO',
+        style: 'deco',
+        pageBg: '#0C171B',
+        surface: '#122228',
+        surface2: '#192E36',
+        border: '#2F4F5A',
+        text: '#F7F3E3',
+        muted: '#9AB3BA',
+        accent: '#EAB308',
+        accentLip: '#A16207',
+        keyBg: '#162930',
+        keyLip: '#081013',
+        keyText: '#F7F3E3',
+        fuseOff: '#27434D',
+        boardBg: '#102026',
+        boardBorder: '#8C6D1F',
+        cellBg: '#172C33',
+        cellInner: '#112228',
+        ambientColor: '#FACC15',
+        oledColor: '#FDE047'
+      },
+      {
+        id: 'neon',
+        name: 'NEON TÓQUIO',
+        style: 'neon',
+        pageBg: '#080D18',
+        surface: '#0E1628',
+        surface2: '#15213A',
+        border: '#243B64',
+        text: '#F0F7FF',
+        muted: '#7EA2D6',
+        accent: '#06B6D4',
+        accentLip: '#0E7490',
+        keyBg: '#121E36',
+        keyLip: '#050912',
+        keyText: '#F0F7FF',
+        fuseOff: '#1F3357',
+        boardBg: '#0C1324',
+        boardBorder: '#0891B2',
+        cellBg: '#131E36',
+        cellInner: '#0D1629',
+        ambientColor: '#22D3EE',
+        oledColor: '#22D3EE'
+      },
+      {
+        id: 'dune',
+        name: 'TERRACOTA DESERTO',
+        style: 'dune',
+        pageBg: '#F4E8D8',
+        surface: '#FDF7EF',
+        surface2: '#E9D6BE',
+        border: '#D5B895',
+        text: '#321E14',
+        muted: '#85624D',
+        accent: '#C84B31',
+        accentLip: '#8F2F1C',
+        keyBg: '#FDF7EF',
+        keyLip: '#CEB18E',
+        keyText: '#321E14',
+        fuseOff: '#D9C0A3',
+        boardBg: '#E4CEB4',
+        boardBorder: '#C7A681',
+        cellBg: '#D8BD9E',
+        cellInner: '#CCAFA0',
+        ambientColor: '#C84B31',
+        oledColor: '#FF7B54'
       }
     ];
+
+    // Paleta prismática dedicada para o MODO FEVER ARCO-ÍRIS (x10)
+    const FEVER_RAINBOW_COLORS = ['#FF3B30', '#FF9500', '#FFCC00', '#34C759', '#00C7BE', '#007AFF', '#AF52DE', '#FF2D55'];
 
     // 14 Paletas vibrantes de alto contraste (ZERO violeta/lavanda)
     const BLOCK_PALETTE = [
@@ -1186,6 +1380,7 @@
         this.dpr = 1;
         this.blocks = {};
         this.deadBlocks = {};
+        this.feverBlocks = [];
         this.glows = [];
         this.boardCanvases = [];
         this.starSprites = [];
@@ -1248,6 +1443,41 @@
           }
           this.deadBlocks[wIdx] = this.renderBlockSprite(px, DEAD_COLOR, style, -1);
         }
+        // 8 blocos prismáticos arco-íris pré-renderizados para o MODO FEVER x10
+        this.feverBlocks = FEVER_RAINBOW_COLORS.map((hex, i) => {
+          const nextHex = FEVER_RAINBOW_COLORS[(i + 1) % FEVER_RAINBOW_COLORS.length];
+          return this.renderFeverBlockSprite(px, hex, nextHex);
+        });
+      }
+
+      renderFeverBlockSprite(size, c1, c2) {
+        const c = makeOffscreen(size, size);
+        const ctx = c.getContext('2d');
+        const s = size;
+        const pad = Math.max(1, s * 0.03);
+        const w = s - pad * 2;
+        const r = Math.max(3, s * 0.22);
+
+        roundRectPath(ctx, pad, pad, w, w, r);
+        const g = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+        g.addColorStop(0, '#FFFFFF');
+        g.addColorStop(0.22, c1);
+        g.addColorStop(0.82, c2);
+        g.addColorStop(1, '#FFFFFF');
+        ctx.fillStyle = g;
+        ctx.fill();
+
+        // Faceta prismática brilhante
+        const ins = w * 0.16;
+        roundRectPath(ctx, pad + ins, pad + ins, w - ins * 2, w - ins * 2, r * 0.55);
+        ctx.fillStyle = 'rgba(255,255,255,0.28)';
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.88)';
+        ctx.lineWidth = Math.max(1.5, s * 0.042);
+        roundRectPath(ctx, pad + 1.5, pad + 1.5, w - 3, w - 3, r * 0.9);
+        ctx.stroke();
+        return c;
       }
 
       renderBlockSprite(size, pal, style, colorIdx) {
@@ -1623,7 +1853,7 @@
           roundRectPath(ctx, pad + 1, pad + 1, w - 2, w - 2, rPcb);
           ctx.stroke();
 
-        } else {
+        } else if (style === 'marble') {
           // ATELIÊ MÁRMORE: Pedra polida arquitetônica com moldura dupla e brilho acetinado
           const rMar = Math.max(3, s * 0.16);
           roundRectPath(ctx, pad, pad, w, w, rMar);
@@ -1652,6 +1882,150 @@
           ctx.quadraticCurveTo(s * 0.48, s * 0.45, pad + w, pad + w * 0.22);
           ctx.stroke();
           ctx.restore();
+
+        } else if (style === 'wood') {
+          // MADEIRA TECA: Marcenaria artesanal com veios horizontais e encaixe marchetado
+          const rWood = Math.max(2, s * 0.14);
+          roundRectPath(ctx, pad, pad, w, w, rWood);
+          const gW = ctx.createLinearGradient(0, pad, 0, pad + w);
+          gW.addColorStop(0, pal.light);
+          gW.addColorStop(0.5, pal.base);
+          gW.addColorStop(1, pal.dark);
+          ctx.fillStyle = gW;
+          ctx.fill();
+
+          ctx.save();
+          roundRectPath(ctx, pad + 2, pad + 2, w - 4, w - 4, rWood * 0.8);
+          ctx.clip();
+          ctx.strokeStyle = 'rgba(40, 20, 5, 0.16)';
+          ctx.lineWidth = Math.max(1, s * 0.032);
+          for (let i = 1; i <= 5; i++) {
+            const yy = pad + (w / 6) * i;
+            ctx.beginPath();
+            ctx.moveTo(pad, yy);
+            ctx.quadraticCurveTo(s * 0.5, yy + (i % 2 === 0 ? 3 : -3), pad + w, yy);
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          // Marchetaria central
+          const mw = w * 0.36;
+          roundRectPath(ctx, (s - mw) * 0.5, (s - mw) * 0.5, mw, mw, rWood * 0.5);
+          ctx.strokeStyle = 'rgba(255, 248, 235, 0.42)';
+          ctx.lineWidth = Math.max(1.2, s * 0.035);
+          ctx.stroke();
+
+        } else if (style === 'magma') {
+          // VULCÃO BASALTO: Rocha vulcânica escura com fissuras incandescentes
+          const rMag = Math.max(2, s * 0.14);
+          roundRectPath(ctx, pad, pad, w, w, rMag);
+          ctx.fillStyle = pal.light;
+          ctx.fill();
+
+          const inset = s * 0.07;
+          roundRectPath(ctx, pad + inset, pad + inset, w - inset * 2, w - inset * 2, rMag * 0.7);
+          const gRock = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+          gRock.addColorStop(0, '#2B2120');
+          gRock.addColorStop(1, '#140E0E');
+          ctx.fillStyle = gRock;
+          ctx.fill();
+
+          // Fissuras de magma luminosas
+          ctx.strokeStyle = pal.light;
+          ctx.lineWidth = Math.max(1.6, s * 0.055);
+          ctx.lineCap = 'round';
+          ctx.beginPath();
+          ctx.moveTo(pad + w * 0.22, pad + w * 0.24);
+          ctx.lineTo(s * 0.52, s * 0.48);
+          ctx.lineTo(pad + w * 0.78, pad + w * 0.32);
+          ctx.moveTo(s * 0.52, s * 0.48);
+          ctx.lineTo(pad + w * 0.64, pad + w * 0.78);
+          ctx.stroke();
+
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = Math.max(0.8, s * 0.02);
+          ctx.stroke();
+
+        } else if (style === 'deco') {
+          // OURO ART DÉCO: Moldura geométrica anos 1920 com raios solares
+          const rDeco = Math.max(2, s * 0.1);
+          roundRectPath(ctx, pad, pad, w, w, rDeco);
+          const gDeco = ctx.createLinearGradient(pad, pad, pad + w, pad + w);
+          gDeco.addColorStop(0, pal.base);
+          gDeco.addColorStop(1, pal.dark);
+          ctx.fillStyle = gDeco;
+          ctx.fill();
+
+          // Dupla moldura dourada
+          ctx.strokeStyle = '#FDE047';
+          ctx.lineWidth = Math.max(1.4, s * 0.04);
+          roundRectPath(ctx, pad + s * 0.05, pad + s * 0.05, w - s * 0.1, w - s * 0.1, rDeco * 0.6);
+          ctx.stroke();
+
+          // Leque Art Déco interno
+          const cx = s * 0.5;
+          const by = pad + w * 0.78;
+          ctx.strokeStyle = 'rgba(253, 224, 71, 0.55)';
+          ctx.lineWidth = Math.max(1, s * 0.028);
+          for (let a = -2; a <= 2; a++) {
+            const ang = -Math.PI * 0.5 + a * 0.34;
+            ctx.beginPath();
+            ctx.moveTo(cx, by);
+            ctx.lineTo(cx + Math.cos(ang) * w * 0.42, by + Math.sin(ang) * w * 0.42);
+            ctx.stroke();
+          }
+
+        } else if (style === 'neon') {
+          // NEON TÓQUIO: Miolo escuro translúcido com tubo de neon duplo e núcleo branco
+          const rNeo = Math.max(3, s * 0.2);
+          roundRectPath(ctx, pad, pad, w, w, rNeo);
+          ctx.fillStyle = '#0D1324';
+          ctx.fill();
+
+          // Tubo externo colorido
+          ctx.strokeStyle = pal.light;
+          ctx.lineWidth = Math.max(2.6, s * 0.09);
+          roundRectPath(ctx, pad + s * 0.08, pad + s * 0.08, w - s * 0.16, w - s * 0.16, rNeo * 0.78);
+          ctx.stroke();
+
+          // Núcleo branco fino
+          ctx.strokeStyle = '#FFFFFF';
+          ctx.lineWidth = Math.max(1, s * 0.028);
+          roundRectPath(ctx, pad + s * 0.08, pad + s * 0.08, w - s * 0.16, w - s * 0.16, rNeo * 0.78);
+          ctx.stroke();
+
+          // Miolo luminoso sutil
+          const dotR = w * 0.13;
+          ctx.fillStyle = pal.base;
+          ctx.beginPath();
+          ctx.arc(s * 0.5, s * 0.5, dotR, 0, Math.PI * 2);
+          ctx.fill();
+
+        } else {
+          // TERRACOTA DESERTO: Argila fosca com borda macia e arco solar gravado
+          const rDune = Math.max(4, s * 0.24);
+          roundRectPath(ctx, pad, pad, w, w, rDune);
+          ctx.fillStyle = pal.dark;
+          ctx.fill();
+
+          const gClay = ctx.createLinearGradient(0, pad, 0, pad + w);
+          gClay.addColorStop(0, pal.light);
+          gClay.addColorStop(0.55, pal.base);
+          gClay.addColorStop(1, pal.dark);
+          roundRectPath(ctx, pad, pad, w, w * 0.93, rDune);
+          ctx.fillStyle = gClay;
+          ctx.fill();
+
+          // Arco solar minimalista gravado
+          ctx.strokeStyle = 'rgba(255, 247, 237, 0.5)';
+          ctx.lineWidth = Math.max(1.5, s * 0.045);
+          ctx.beginPath();
+          ctx.arc(s * 0.5, pad + w * 0.62, w * 0.24, Math.PI, 0);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(pad + w * 0.22, pad + w * 0.68);
+          ctx.lineTo(pad + w * 0.78, pad + w * 0.68);
+          ctx.stroke();
         }
 
         return c;
@@ -1707,6 +2081,7 @@
         this.targetLookY = 0;
         this.color = WORLDS[0].oledColor;
         this.t = 0;
+        this.homeCycleTimer = 3.2;
       }
 
       setWorldColor(hex) {
@@ -1725,6 +2100,29 @@
         this.stateDuration = duration;
       }
 
+      poke() {
+        const reactions = ['wink', 'love', 'hyped', 'proud', 'curious', 'combo2'];
+        const pick = reactions[Math.floor(Math.random() * reactions.length)];
+        this.setState(pick, 1.35);
+      }
+
+      updateHomeShowcase(dt) {
+        this.homeCycleTimer -= dt;
+        if (this.homeCycleTimer <= 0) {
+          this.homeCycleTimer = 3.0 + Math.random() * 2.2;
+          const moods = ['wink', 'curious', 'hyped', 'proud', 'love', 'idle', 'combo2'];
+          const next = moods[Math.floor(Math.random() * moods.length)];
+          if (next === 'idle') {
+            this.setState('idle', 0);
+            this.setLook((Math.random() - 0.5) * 1.1, (Math.random() - 0.5) * 0.6);
+          } else {
+            this.setState(next, 1.65);
+            this.setLook(0, 0);
+          }
+        }
+        this.update(dt, 'idle');
+      }
+
       update(dt, fallbackMood) {
         this.t += dt;
         this.lookX += (this.targetLookX - this.lookX) * Math.min(1, dt * 14);
@@ -1739,6 +2137,8 @@
           }
         } else if (
           this.state === 'idle' ||
+          this.state === 'focused' ||
+          this.state === 'sleepy' ||
           this.state === 'danger' ||
           this.state === 'fuseWarning'
         ) {
@@ -1770,9 +2170,18 @@
         ctx.fillStyle = 'rgba(255,255,255,0.03)';
         for (let y = 0; y < h; y += 4) ctx.fillRect(0, y, w, 1);
 
-        const col = this.state === 'danger' || this.state === 'fuseWarning'
-          ? '#F87171'
-          : (this.state === 'newRecord' || this.state === 'allClear' ? '#FDE047' : this.color);
+        let col = this.color;
+        if (this.state === 'danger' || this.state === 'fuseWarning' || this.state === 'dizzy') {
+          col = '#F87171';
+        } else if (this.state === 'newRecord' || this.state === 'allClear' || this.state === 'aimMulti') {
+          col = '#FDE047';
+        } else if (this.state === 'love') {
+          col = '#FB7185';
+        } else if (this.state === 'fire') {
+          col = '#FF6B2B';
+        } else if (this.state === 'sleepy') {
+          col = '#7DD3FC';
+        }
 
         ctx.strokeStyle = col;
         ctx.fillStyle = col;
@@ -1796,6 +2205,36 @@
             ctx.moveTo(cx - 12, cy + 18);
             ctx.quadraticCurveTo(cx, cy + 12, cx + 12, cy + 18);
             ctx.stroke();
+            break;
+          }
+          case 'fever': {
+            // MODO FEVER x10: Olhos em estrela arco-íris ciclantes + coroa + sorriso máximo
+            const c1 = FEVER_RAINBOW_COLORS[Math.floor(this.t * 14) % FEVER_RAINBOW_COLORS.length];
+            const c2 = FEVER_RAINBOW_COLORS[(Math.floor(this.t * 14) + 3) % FEVER_RAINBOW_COLORS.length];
+            const sc = 1 + Math.sin(this.t * 22) * 0.2;
+            const hop = Math.abs(Math.sin(this.t * 16)) * -3.5;
+            this.drawCrown(ctx, cx, 9 + hop, '#FDE047');
+            ctx.fillStyle = c1;
+            this.drawStar(ctx, cx - 26, cy - 2 + hop, 12.5 * sc);
+            ctx.fillStyle = c2;
+            this.drawStar(ctx, cx + 26, cy - 2 + hop, 12.5 * sc);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.beginPath();
+            ctx.arc(cx, cy + 16 + hop, 11.5, 0, Math.PI);
+            ctx.fill();
+            break;
+          }
+          case 'fire': {
+            // Combo x5+: Olhos em chamas elétricas + coroa dourada + vibração intensa
+            const jx = Math.sin(this.t * 50) * 1.8;
+            this.drawCrown(ctx, cx + jx, 10, '#FDE047');
+            const fl = Math.sin(this.t * 28) * 3;
+            this.drawFlameEye(ctx, cx - 26 + jx, cy - 1, 13, fl, '#FF6B2B', '#FDE047');
+            this.drawFlameEye(ctx, cx + 26 + jx, cy - 1, 13, -fl, '#FF6B2B', '#FDE047');
+            ctx.fillStyle = '#FDE047';
+            ctx.beginPath();
+            ctx.arc(cx + jx, cy + 16, 10, 0, Math.PI);
+            ctx.fill();
             break;
           }
           case 'combo4Plus': {
@@ -1848,6 +2287,25 @@
             ctx.stroke();
             break;
           }
+          case 'aimMulti': {
+            // Prevendo quebra múltipla (2+ linhas/colunas): olhos de mira laser + boca em "O"
+            const pulse = 1 + Math.sin(this.t * 26) * 0.18;
+            ctx.lineWidth = 3;
+            for (const ex of [cx - 26, cx + 26]) {
+              ctx.beginPath();
+              ctx.arc(ex, cy - 5, 10 * pulse, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.beginPath();
+              ctx.moveTo(ex - 13, cy - 5); ctx.lineTo(ex + 13, cy - 5);
+              ctx.moveTo(ex, cy - 18); ctx.lineTo(ex, cy + 8);
+              ctx.stroke();
+            }
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.arc(cx, cy + 17, 7, 0, Math.PI * 2);
+            ctx.stroke();
+            break;
+          }
           case 'aimClear': {
             const jx = Math.sin(this.t * 48) * 2.5;
             const jy = Math.cos(this.t * 42) * 2;
@@ -1864,6 +2322,143 @@
             ctx.beginPath();
             ctx.arc(cx + jx, cy + 16, 7.5, 0, Math.PI * 2);
             ctx.fill();
+            break;
+          }
+          case 'love': {
+            // Olhos de coração pulsantes
+            const sc = 1 + Math.sin(this.t * 14) * 0.15;
+            this.drawHeart(ctx, cx - 26, cy - 4, 11 * sc);
+            this.drawHeart(ctx, cx + 26, cy - 4, 11 * sc);
+            ctx.lineWidth = 3.8;
+            ctx.beginPath();
+            ctx.arc(cx, cy + 14, 9, 0.1 * Math.PI, 0.9 * Math.PI);
+            ctx.stroke();
+            break;
+          }
+          case 'wink': {
+            // Piscadela marota com sorriso tortinho
+            roundRectPath(ctx, cx - 33, cy - 14, 14, 20, 6);
+            ctx.fill();
+            ctx.fillStyle = '#0B0F14';
+            ctx.beginPath();
+            ctx.arc(cx - 24, cy - 8, 2.6, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = col;
+            ctx.lineWidth = 4.5;
+            ctx.beginPath();
+            ctx.moveTo(cx + 16, cy - 3);
+            ctx.quadraticCurveTo(cx + 26, cy - 12, cx + 36, cy - 3);
+            ctx.stroke();
+            ctx.lineWidth = 3.8;
+            ctx.beginPath();
+            ctx.moveTo(cx - 9, cy + 16);
+            ctx.quadraticCurveTo(cx + 3, cy + 23, cx + 13, cy + 13);
+            ctx.stroke();
+            break;
+          }
+          case 'hyped': {
+            // Olhos de diamante brilhantes + salto de empolgação
+            const hop = Math.abs(Math.sin(this.t * 12)) * -4;
+            this.drawDiamond(ctx, cx - 26, cy - 5 + hop, 10, 13);
+            this.drawDiamond(ctx, cx + 26, cy - 5 + hop, 10, 13);
+            ctx.beginPath();
+            ctx.arc(cx, cy + 14 + hop, 11, 0, Math.PI);
+            ctx.fill();
+            break;
+          }
+          case 'proud': {
+            // Olhos felizes em arco + bochechas iluminadas
+            ctx.lineWidth = 4.5;
+            ctx.beginPath();
+            ctx.arc(cx - 26, cy - 1, 9.5, Math.PI * 1.12, Math.PI * 1.88);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(cx + 26, cy - 1, 9.5, Math.PI * 1.12, Math.PI * 1.88);
+            ctx.stroke();
+            // Bochechas
+            ctx.fillStyle = 'rgba(251, 113, 133, 0.55)';
+            ctx.beginPath();
+            ctx.ellipse(cx - 38, cy + 10, 6, 3.5, 0, 0, Math.PI * 2);
+            ctx.ellipse(cx + 38, cy + 10, 6, 3.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = col;
+            ctx.lineWidth = 3.8;
+            ctx.beginPath();
+            ctx.moveTo(cx - 10, cy + 13);
+            ctx.quadraticCurveTo(cx, cy + 22, cx + 10, cy + 13);
+            ctx.stroke();
+            break;
+          }
+          case 'curious': {
+            // Olho esquerdo maior + sobrancelha direita arqueada
+            ctx.beginPath();
+            ctx.arc(cx - 26 + ox * 0.5, cy - 4, 10.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(cx + 26 + ox * 0.5, cy - 3, 7, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#0B0F14';
+            ctx.beginPath();
+            ctx.arc(cx - 24 + ox * 0.5, cy - 6, 3, 0, Math.PI * 2);
+            ctx.arc(cx + 27 + ox * 0.5, cy - 5, 2.2, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = col;
+            ctx.lineWidth = 3.5;
+            ctx.beginPath();
+            ctx.moveTo(cx + 16, cy - 16);
+            ctx.quadraticCurveTo(cx + 26, cy - 23, cx + 36, cy - 15);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(cx - 8, cy + 16);
+            ctx.lineTo(cx + 8, cy + 15);
+            ctx.stroke();
+            break;
+          }
+          case 'sleepy': {
+            // Sonolento com pálpebras baixas e "z" flutuando
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(cx - 36, cy - 2); ctx.quadraticCurveTo(cx - 26, cy + 5, cx - 16, cy - 2);
+            ctx.moveTo(cx + 16, cy - 2); ctx.quadraticCurveTo(cx + 26, cy + 5, cx + 36, cy - 2);
+            ctx.stroke();
+            const zOff = (this.t * 14) % 16;
+            ctx.font = '800 13px "Space Grotesk", sans-serif';
+            ctx.globalAlpha = clamp(1 - zOff / 16, 0.2, 1);
+            ctx.fillText('z', w - 26, 26 - zOff * 0.8);
+            ctx.globalAlpha = 1;
+            ctx.beginPath();
+            ctx.arc(cx, cy + 16, 4.5 + Math.sin(this.t * 3) * 1.2, 0, Math.PI * 2);
+            ctx.stroke();
+            break;
+          }
+          case 'dizzy': {
+            // Olhos girando em espiral
+            ctx.lineWidth = 3.2;
+            const ang = this.t * 10;
+            this.drawSpiral(ctx, cx - 26, cy - 4, 10, ang);
+            this.drawSpiral(ctx, cx + 26, cy - 4, 10, -ang);
+            ctx.beginPath();
+            ctx.moveTo(cx - 12, cy + 17);
+            ctx.quadraticCurveTo(cx - 4, cy + 11, cx, cy + 17);
+            ctx.quadraticCurveTo(cx + 4, cy + 23, cx + 12, cy + 17);
+            ctx.stroke();
+            break;
+          }
+          case 'focused': {
+            // Concentrado / determinado (ocupação 50% a 71%)
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(cx - 36, cy - 13); ctx.lineTo(cx - 16, cy - 8);
+            ctx.moveTo(cx + 36, cy - 13); ctx.lineTo(cx + 16, cy - 8);
+            ctx.stroke();
+            roundRectPath(ctx, lx - 7, ey - 5, 14, 12, 4);
+            ctx.fill();
+            roundRectPath(ctx, rx - 7, ey - 5, 14, 12, 4);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(cx - 10, cy + 17);
+            ctx.lineTo(cx + 10, cy + 17);
+            ctx.stroke();
             break;
           }
           case 'worldShift': {
@@ -2026,6 +2621,57 @@
           if (i === 0) ctx.moveTo(px, py);
           else ctx.lineTo(px, py);
         }
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      drawDiamond(ctx, x, y, rx, ry) {
+        ctx.beginPath();
+        ctx.moveTo(x, y - ry);
+        ctx.lineTo(x + rx, y);
+        ctx.lineTo(x, y + ry);
+        ctx.lineTo(x - rx, y);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      drawHeart(ctx, x, y, s) {
+        ctx.beginPath();
+        ctx.moveTo(x, y + s * 0.65);
+        ctx.bezierCurveTo(x - s * 1.2, y - s * 0.1, x - s * 0.75, y - s * 1.0, x, y - s * 0.35);
+        ctx.bezierCurveTo(x + s * 0.75, y - s * 1.0, x + s * 1.2, y - s * 0.1, x, y + s * 0.65);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      drawSpiral(ctx, cx, cy, maxR, startAng) {
+        ctx.beginPath();
+        for (let i = 0; i <= 22; i++) {
+          const p = i / 22;
+          const a = startAng + p * Math.PI * 3.4;
+          const r = p * maxR;
+          const px = cx + Math.cos(a) * r;
+          const py = cy + Math.sin(a) * r;
+          if (i === 0) ctx.moveTo(px, py);
+          else ctx.lineTo(px, py);
+        }
+        ctx.stroke();
+      }
+
+      drawFlameEye(ctx, x, y, r, sway, outerCol, innerCol) {
+        ctx.fillStyle = outerCol;
+        ctx.beginPath();
+        ctx.moveTo(x + sway, y - r);
+        ctx.quadraticCurveTo(x + r * 0.9, y - r * 0.1, x + r * 0.65, y + r * 0.65);
+        ctx.quadraticCurveTo(x, y + r * 0.9, x - r * 0.65, y + r * 0.65);
+        ctx.quadraticCurveTo(x - r * 0.9, y - r * 0.1, x + sway, y - r);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = innerCol;
+        ctx.beginPath();
+        ctx.moveTo(x + sway * 0.5, y - r * 0.45);
+        ctx.quadraticCurveTo(x + r * 0.42, y + r * 0.1, x, y + r * 0.55);
+        ctx.quadraticCurveTo(x - r * 0.42, y + r * 0.1, x + sway * 0.5, y - r * 0.45);
         ctx.closePath();
         ctx.fill();
       }
@@ -2315,6 +2961,24 @@
 
       playStreakBroken() {
         this.tone(310, 'triangle', 0, 0.15, 0.1, 175);
+      }
+
+      playFeverStart() {
+        this.unlock(() => {
+          const notes = [523.25, 659.25, 783.99, 1046.5, 1318.5, 1567.98];
+          notes.forEach((n, i) => {
+            this.tone(n, 'triangle', i * 0.045, 0.28, 0.13);
+            this.tone(n * 1.5, 'sine', i * 0.045 + 0.015, 0.18, 0.06);
+          });
+        });
+      }
+
+      playFeverClear() {
+        this.unlock();
+        const notes = [659.25, 880.0, 1046.5, 1318.5, 1760.0];
+        notes.forEach((n, i) => {
+          this.tone(n, 'sine', i * 0.032, 0.24, 0.11);
+        });
       }
 
       playRecordFanfare() {
@@ -2831,6 +3495,7 @@
         this.beatRecordThisRun = false;
         this.combo = 0;
         this.fuseMoves = 0;
+        this.feverMoves = 0; // > 0 => MODO FEVER ATIVO (arco-íris + x10!)
         this.linesSinceShift = 0;
         this.worldIdx = 0;
         this.prevWorldIdx = 0;
@@ -2852,7 +3517,10 @@
         this.time = 0;
         this.boardRimFlash = 0;
         this.boardRimColor = '#FF551A';
+        this.boardZoom = 0;
         this.previewSparkTimer = 0;
+        this.idleSeconds = 0;
+        this.failedDrops = 0;
 
         this.drag = {
           active: false,
@@ -2903,6 +3571,21 @@
         this.banners = Array.from({ length: 4 }, () => ({
           active: false, life: 0, maxLife: 1.15, sprite: null, sw: 0, sh: 0
         }));
+        // Novos pools de alto impacto visual (60/120 FPS sem GC)
+        this.shatterPool = Array.from({ length: 72 }, () => ({
+          active: false, x: 0, y: 0, vx: 0, vy: 0, w: 10, h: 10,
+          rot: 0, vrot: 0, color: '#fff', light: '#fff', life: 0, maxLife: 0.55
+        }));
+        this.cellRingPool = Array.from({ length: 36 }, () => ({
+          active: false, x: 0, y: 0, maxR: 36, color: '#fff', life: 0, maxLife: 0.32
+        }));
+        this.cutterPool = Array.from({ length: 16 }, () => ({
+          active: false, isRow: true, index: 0, color: '#fff', life: 0, maxLife: 0.24, dir: 1
+        }));
+        this.confettiPool = Array.from({ length: 90 }, () => ({
+          active: false, x: 0, y: 0, vx: 0, vy: 0, size: 7, color: '#fff',
+          phase: 0, vphase: 10, rot: 0, vrot: 4, life: 0, maxLife: 1.25
+        }));
         this.ambient = Array.from({ length: 22 }, () => ({
           x: Math.random(), y: Math.random(), r: 1.5 + Math.random() * 2.5,
           vy: 0.012 + Math.random() * 0.025, phase: Math.random() * Math.PI * 2
@@ -2951,6 +3634,7 @@
             movesPlayed: this.movesPlayed,
             combo: this.combo,
             fuseMoves: this.fuseMoves,
+            feverMoves: this.feverMoves,
             linesSinceShift: this.linesSinceShift,
             worldIdx: this.worldIdx,
             gameOver: this.gameOver
@@ -2986,6 +3670,7 @@
           this.movesPlayed = data.movesPlayed | 0;
           this.combo = data.combo | 0;
           this.fuseMoves = data.fuseMoves | 0;
+          this.feverMoves = data.feverMoves | 0;
           this.linesSinceShift = data.linesSinceShift | 0;
           this.worldIdx = clamp(data.worldIdx | 0, 0, WORLDS.length - 1);
           this.prevWorldIdx = this.worldIdx;
@@ -3003,6 +3688,7 @@
 
       openHomeScreen() {
         this.isHomeOpen = true;
+        document.body.classList.remove('fever-mode');
         this.modal.classList.remove('open');
         this.syncHomeScreenUI(this.hasValidSavedRun());
         this.homeScreen.classList.remove('hidden');
@@ -3066,6 +3752,19 @@
           this.audio.unlock();
           this.audio.playStartGame();
           this.startNewGame(true);
+        });
+
+        document.getElementById('mascotCanvas').parentElement.addEventListener('click', () => {
+          this.audio.unlock();
+          this.audio.playPickup();
+          this.idleSeconds = 0;
+          this.mascot.poke();
+        });
+
+        document.getElementById('homeMascotCanvas').parentElement.addEventListener('click', () => {
+          this.audio.unlock();
+          this.audio.playPickup();
+          this.homeMascot.poke();
         });
       }
 
@@ -3134,6 +3833,8 @@
         this.beatRecordThisRun = false;
         this.combo = 0;
         this.fuseMoves = 0;
+        this.feverMoves = 0;
+        document.body.classList.remove('fever-mode');
         this.linesSinceShift = 0;
         this.worldIdx = 0;
         this.prevWorldIdx = 0;
@@ -3149,6 +3850,11 @@
         this.shockwaves.forEach(s => s.active = false);
         this.popups.forEach(p => p.active = false);
         this.banners.forEach(b => b.active = false);
+        this.shatterPool.forEach(s => s.active = false);
+        this.cellRingPool.forEach(r => r.active = false);
+        this.cutterPool.forEach(c => c.active = false);
+        this.confettiPool.forEach(c => c.active = false);
+        this.boardZoom = 0;
 
         // Em ~35% das runs, inicia um arranjo tático de abertura usando apenas peças clássicas de SHAPES;
         // nas demais ~65% das runs, inicia o tabuleiro clássico 100% limpo com dificuldade progressiva.
@@ -3170,9 +3876,19 @@
 
         this.modal.classList.remove('open');
         this.applyWorldCSS(0);
-        this.mascot.setState('idle', 0);
+        this.idleSeconds = 0;
+        this.failedDrops = 0;
+        this.mascot.setState('hyped', 1.15);
         this.updateHUD();
         if (clearSaved) this.saveRunState();
+      }
+
+      getScoreMultiplier() {
+        if (this.feverMoves > 0) return 10;
+        if (this.combo >= 4) return 5;
+        if (this.combo === 3) return 3;
+        if (this.combo === 2) return 2;
+        return 1;
       }
 
       updateHUD(bumpScore = false) {
@@ -3184,15 +3900,29 @@
           setTimeout(() => this.elScore.classList.remove('bump'), 150);
         }
 
-        const displayCombo = Math.max(1, this.combo);
-        this.elComboTag.textContent = `x${displayCombo}`;
-        for (let i = 0; i < 3; i++) {
-          const el = this.fuseEls[i];
-          el.classList.remove('active', 'hot', 'warn');
-          if (i < this.fuseMoves) {
-            if (this.fuseMoves === 1 && this.combo >= 2) el.classList.add('warn');
-            else if (this.combo >= 3) el.classList.add('hot');
-            else el.classList.add('active');
+        const isFever = this.feverMoves > 0;
+        document.body.classList.toggle('fever-mode', isFever && !this.isHomeOpen && !this.gameOver);
+
+        if (isFever) {
+          this.elWorldName.textContent = `FEVER x10 • ${this.feverMoves}`;
+          this.elComboTag.textContent = 'x10';
+          for (let i = 0; i < 3; i++) {
+            const el = this.fuseEls[i];
+            el.classList.remove('active', 'hot', 'warn');
+            el.classList.add('fever');
+          }
+        } else {
+          this.elWorldName.textContent = WORLDS[this.worldIdx].name;
+          const mult = this.getScoreMultiplier();
+          this.elComboTag.textContent = `x${mult}`;
+          for (let i = 0; i < 3; i++) {
+            const el = this.fuseEls[i];
+            el.classList.remove('active', 'hot', 'warn', 'fever');
+            if (i < this.fuseMoves) {
+              if (this.fuseMoves === 1 && this.combo >= 2) el.classList.add('warn');
+              else if (this.combo >= 3) el.classList.add('hot');
+              else el.classList.add('active');
+            }
           }
         }
       }
@@ -3295,7 +4025,10 @@
             this.audio.playHoverTick();
           }
 
-          if (pred.rows.length + pred.cols.length > 0) {
+          const predCount = pred.rows.length + pred.cols.length;
+          if (predCount >= 2) {
+            this.mascot.setState('aimMulti', 0);
+          } else if (predCount === 1) {
             this.mascot.setState('aimClear', 0);
           } else {
             this.mascot.setState('tracking', 0);
@@ -3307,7 +4040,7 @@
           this.drag.predictedRows = [];
           this.drag.predictedCols = [];
           this.drag.lastHoverKey = -1;
-          this.mascot.setState('tracking', 0);
+          this.mascot.setState('curious', 0);
         }
       }
 
@@ -3323,16 +4056,28 @@
         this.mascot.setLook(0, 0);
 
         if (canDrop && piece) {
+          this.failedDrops = 0;
+          this.idleSeconds = 0;
           this.onPiecePlaced(piece, trayIndex, snapR, snapC);
         } else {
-          this.mascot.setState(this.getMoodFallback(), 0);
+          this.failedDrops++;
+          if (this.failedDrops >= 2) {
+            this.mascot.setState('dizzy', 0.9);
+            this.failedDrops = 0;
+          } else {
+            this.mascot.setState(this.getMoodFallback(), 0);
+          }
         }
       }
 
       getMoodFallback() {
         if (this.gameOver) return 'gameOver';
-        if (this.board.countFillRatio() >= 0.72) return 'danger';
+        if (this.feverMoves > 0) return 'fever';
+        const fill = this.board.countFillRatio();
+        if (fill >= 0.72) return 'danger';
         if (this.fuseMoves === 1 && this.combo >= 2) return 'fuseWarning';
+        if (this.idleSeconds >= 9) return 'sleepy';
+        if (fill >= 0.50) return 'focused';
         return 'idle';
       }
 
@@ -3359,7 +4104,8 @@
         const centerPt = this.cellCenter(centerR, centerC);
 
         const totalLines = res.clearedRows.length + res.clearedCols.length;
-        let pointsEarned = res.placedCells.length * 10;
+        let rawPoints = res.placedCells.length * 10;
+        let feverJustStarted = false;
 
         this.audio.playPlace(res.placedCells.length);
 
@@ -3372,10 +4118,19 @@
           this.fuseMoves = 3;
           this.linesSinceShift += totalLines;
 
+          // Gatilho do MODO FEVER x10: 5 combos consecutivos (ou 4+ com limpeza múltipla)
+          if (this.feverMoves === 0 && (this.combo >= 5 || (this.combo >= 4 && totalLines >= 2))) {
+            this.feverMoves = 6;
+            feverJustStarted = true;
+          } else if (this.feverMoves > 0) {
+            // Quebrar linha durante o Fever mantém o ritmo vivo (+1 jogada até o teto de 8)
+            this.feverMoves = Math.min(8, this.feverMoves);
+          }
+
           const lineBase = totalLines * totalLines * 100;
           const comboBonus = this.combo > 1 ? this.combo * 60 : 0;
           const allClearBonus = res.isAllClear ? 1000 : 0;
-          pointsEarned += lineBase + comboBonus + allClearBonus;
+          rawPoints += lineBase + comboBonus + allClearBonus;
 
           if (res.isAllClear) {
             qualityBadge = 'TABULEIRO ZERADO!';
@@ -3419,19 +4174,42 @@
             this.shakeMag = 2.6;
           }
 
-          const accent = BLOCK_PALETTE[piece.colorId].glow;
-          this.boardRimFlash = Math.min(1, 0.62 + totalLines * 0.16 + this.combo * 0.08);
-          this.boardRimColor = (totalLines >= 2 || this.combo >= 3) ? '#FDE047' : accent;
+          const isFeverNow = this.feverMoves > 0;
+          const accent = isFeverNow
+            ? FEVER_RAINBOW_COLORS[Math.floor(Math.random() * FEVER_RAINBOW_COLORS.length)]
+            : BLOCK_PALETTE[piece.colorId].glow;
+
+          this.boardRimFlash = Math.min(1, 0.72 + totalLines * 0.16 + this.combo * 0.08);
+          this.boardRimColor = isFeverNow ? '#FFFFFF' : ((totalLines >= 2 || this.combo >= 3) ? '#FDE047' : accent);
+          this.boardZoom = (totalLines >= 2 || isFeverNow) ? 0.032 : 0.018;
 
           for (const r of res.clearedRows) {
-            this.spawnLaser(true, r, accent);
-            this.spawnFlash(true, r, accent);
-            this.spawnLineStreaks(true, r, accent, 12 + totalLines * 3);
+            const rowCol = isFeverNow ? FEVER_RAINBOW_COLORS[r % FEVER_RAINBOW_COLORS.length] : accent;
+            this.spawnLaser(true, r, rowCol);
+            this.spawnFlash(true, r, rowCol);
+            this.spawnCutter(true, r, rowCol);
+            this.spawnLineStreaks(true, r, rowCol, 14 + totalLines * 4);
           }
           for (const c of res.clearedCols) {
-            this.spawnLaser(false, c, accent);
-            this.spawnFlash(false, c, accent);
-            this.spawnLineStreaks(false, c, accent, 12 + totalLines * 3);
+            const colCol = isFeverNow ? FEVER_RAINBOW_COLORS[(c + 3) % FEVER_RAINBOW_COLORS.length] : accent;
+            this.spawnLaser(false, c, colCol);
+            this.spawnFlash(false, c, colCol);
+            this.spawnCutter(false, c, colCol);
+            this.spawnLineStreaks(false, c, colCol, 14 + totalLines * 4);
+          }
+
+          if (totalLines >= 2 || this.combo >= 3 || isFeverNow) {
+            this.spawnConfetti(isFeverNow ? 36 : (16 + totalLines * 6), isFeverNow);
+          }
+
+          if (feverJustStarted) {
+            this.audio.playFeverStart();
+            this.spawnBanner('MODO FEVER x10!', '#FDE047');
+            this.spawnConfetti(48, true);
+            this.spawnShockwave(centerPt.x, centerPt.y, '#FF2D55', this.boardPx * 0.95, 0);
+            this.spawnShockwave(centerPt.x, centerPt.y, '#00C7BE', this.boardPx * 1.1, 0.08);
+          } else if (isFeverNow) {
+            this.audio.playFeverClear();
           }
 
           // Explosão extra em cada ponto de cruzamento linha × coluna
@@ -3476,11 +4254,15 @@
             this.spawnBanner(label, this.combo >= 4 ? '#FDE047' : accent);
           }
 
-          if (res.isAllClear) this.mascot.setState('allClear', 1.6);
-          else if (this.combo >= 4) this.mascot.setState('combo4Plus', 1.5);
-          else if (this.combo === 3) this.mascot.setState('combo3', 1.3);
-          else if (this.combo === 2) this.mascot.setState('combo2', 1.15);
-          else this.mascot.setState('place', 0.65);
+          if (this.feverMoves > 0) this.mascot.setState('fever', 1.8);
+          else if (res.isAllClear) this.mascot.setState('allClear', 1.7);
+          else if (this.combo >= 5) this.mascot.setState('fire', 1.7);
+          else if (this.combo === 4) this.mascot.setState('combo4Plus', 1.55);
+          else if (totalLines >= 3) this.mascot.setState('love', 1.45);
+          else if (this.combo === 3) this.mascot.setState('combo3', 1.35);
+          else if (this.combo === 2) this.mascot.setState('combo2', 1.2);
+          else if (totalLines === 2) this.mascot.setState('proud', 1.1);
+          else this.mascot.setState('hyped', 0.85);
 
           const shouldShift = totalLines >= 2 || (this.combo >= 2 && this.combo % 2 === 0) || this.linesSinceShift >= 4;
           if (shouldShift) {
@@ -3489,6 +4271,9 @@
           }
 
         } else {
+          if (this.feverMoves > 0) {
+            this.feverMoves = Math.max(0, this.feverMoves - 1);
+          }
           if (this.fuseMoves > 0) {
             this.fuseMoves--;
             if (this.fuseMoves === 1 && this.combo >= 2) {
@@ -3513,7 +4298,19 @@
             qualityBadge = 'ENCAIXE LIMPO!';
             qualityColor = '#0EA5E9';
             this.audio.playQualityStimulus('clean');
+            this.mascot.setState('wink', 0.9);
+          } else if (res.placedCells.length >= 5) {
+            this.mascot.setState('proud', 0.75);
           }
+        }
+
+        const activeMult = this.getScoreMultiplier();
+        const pointsEarned = Math.round(rawPoints * activeMult);
+        if (this.feverMoves > 0) {
+          qualityBadge = qualityBadge ? `FEVER x10 • ${qualityBadge}` : 'FEVER x10!';
+          qualityColor = '#FF2D55';
+        } else if (activeMult > 1 && totalLines > 0) {
+          qualityBadge = `${qualityBadge} x${activeMult}`;
         }
 
         this.score += pointsEarned;
@@ -3579,6 +4376,8 @@
 
       triggerGameOver() {
         this.gameOver = true;
+        this.feverMoves = 0;
+        document.body.classList.remove('fever-mode');
         this.gameOverAnim = 0;
         this.audio.playGameOver();
         this.mascot.setState('gameOver', 0);
@@ -3692,6 +4491,85 @@
           p.starIdx = Math.random() < 0.5 ? 0 : 1;
           p.gravity = 0;
           return;
+        }
+      }
+
+      spawnShatter(x, y, colorId, isFever = false) {
+        const pal = BLOCK_PALETTE[colorId] || BLOCK_PALETTE[0];
+        let spawned = 0;
+        for (let i = 0; i < this.shatterPool.length && spawned < 2; i++) {
+          const sh = this.shatterPool[i];
+          if (sh.active) continue;
+          const ang = Math.random() * Math.PI * 2;
+          const spd = 95 + Math.random() * 195;
+          sh.active = true;
+          sh.x = x + (Math.random() - 0.5) * this.cellPx * 0.4;
+          sh.y = y + (Math.random() - 0.5) * this.cellPx * 0.4;
+          sh.vx = Math.cos(ang) * spd;
+          sh.vy = Math.sin(ang) * spd - 90;
+          sh.w = this.cellPx * (0.28 + Math.random() * 0.18);
+          sh.h = this.cellPx * (0.22 + Math.random() * 0.18);
+          sh.rot = Math.random() * Math.PI;
+          sh.vrot = (Math.random() - 0.5) * 16;
+          sh.color = isFever ? FEVER_RAINBOW_COLORS[Math.floor(Math.random() * FEVER_RAINBOW_COLORS.length)] : pal.base;
+          sh.light = isFever ? '#FFFFFF' : pal.light;
+          sh.life = 0;
+          sh.maxLife = 0.42 + Math.random() * 0.24;
+          spawned++;
+        }
+      }
+
+      spawnCellRing(x, y, color) {
+        for (const r of this.cellRingPool) {
+          if (!r.active) {
+            r.active = true;
+            r.x = x;
+            r.y = y;
+            r.maxR = this.cellPx * 0.92;
+            r.color = color;
+            r.life = 0;
+            r.maxLife = 0.28;
+            return;
+          }
+        }
+      }
+
+      spawnCutter(isRow, index, color) {
+        for (const c of this.cutterPool) {
+          if (!c.active) {
+            c.active = true;
+            c.isRow = isRow;
+            c.index = index;
+            c.color = color;
+            c.life = 0;
+            c.maxLife = 0.22;
+            c.dir = Math.random() < 0.5 ? 1 : -1;
+            return;
+          }
+        }
+      }
+
+      spawnConfetti(count = 20, rainbow = false) {
+        let spawned = 0;
+        for (let i = 0; i < this.confettiPool.length && spawned < count; i++) {
+          const cf = this.confettiPool[i];
+          if (cf.active) continue;
+          cf.active = true;
+          cf.x = this.boardX + Math.random() * this.boardPx;
+          cf.y = this.boardY - 12 - Math.random() * 35;
+          cf.vx = (Math.random() - 0.5) * 130;
+          cf.vy = 95 + Math.random() * 175;
+          cf.size = 6 + Math.random() * 5;
+          cf.color = rainbow
+            ? FEVER_RAINBOW_COLORS[Math.floor(Math.random() * FEVER_RAINBOW_COLORS.length)]
+            : BLOCK_PALETTE[Math.floor(Math.random() * BLOCK_PALETTE.length)].light;
+          cf.phase = Math.random() * Math.PI * 2;
+          cf.vphase = 8 + Math.random() * 10;
+          cf.rot = Math.random() * Math.PI;
+          cf.vrot = (Math.random() - 0.5) * 7;
+          cf.life = 0;
+          cf.maxLife = 0.95 + Math.random() * 0.55;
+          spawned++;
         }
       }
 
@@ -3809,8 +4687,14 @@
       update(dt) {
         this.time += dt;
         if (this.isHomeOpen) {
-          this.homeMascot.update(dt, 'idle');
+          this.homeMascot.updateHomeShowcase(dt);
           return;
+        }
+
+        if (!this.drag.active && !this.gameOver) {
+          this.idleSeconds += dt;
+        } else {
+          this.idleSeconds = 0;
         }
 
         this.mascot.update(dt, this.getMoodFallback());
@@ -3854,7 +4738,13 @@
             if (!d.pipped) {
               d.pipped = true;
               const pt = this.cellCenter(d.r, d.c);
+              const isFev = this.feverMoves > 0;
+              const ringCol = isFev
+                ? FEVER_RAINBOW_COLORS[(d.r + d.c) % FEVER_RAINBOW_COLORS.length]
+                : (BLOCK_PALETTE[d.colorId] ? BLOCK_PALETTE[d.colorId].glow : '#FFFFFF');
               this.spawnBurst(pt.x, pt.y, d.colorId, 6);
+              this.spawnShatter(pt.x, pt.y, d.colorId, isFev);
+              this.spawnCellRing(pt.x, pt.y, ringCol);
               if (d.idx % 2 === 0) this.audio.playDominoPip(d.idx, this.combo);
             }
             d.total -= dt;
@@ -3866,6 +4756,9 @@
 
         if (this.boardRimFlash > 0) {
           this.boardRimFlash = Math.max(0, this.boardRimFlash - dt * 3.1);
+        }
+        if (this.boardZoom > 0) {
+          this.boardZoom = Math.max(0, this.boardZoom - dt * 0.16);
         }
 
         // Emite micro-faíscas contínuas quando o bloco arrastado pode quebrar linha/coluna
@@ -3922,6 +4815,39 @@
           if (b.life >= b.maxLife) b.active = false;
         }
 
+        for (const sh of this.shatterPool) {
+          if (!sh.active) continue;
+          sh.life += dt;
+          if (sh.life >= sh.maxLife) { sh.active = false; continue; }
+          sh.vy += 560 * dt;
+          sh.x += sh.vx * dt;
+          sh.y += sh.vy * dt;
+          sh.rot += sh.vrot * dt;
+        }
+
+        for (const r of this.cellRingPool) {
+          if (!r.active) continue;
+          r.life += dt;
+          if (r.life >= r.maxLife) r.active = false;
+        }
+
+        for (const ct of this.cutterPool) {
+          if (!ct.active) continue;
+          ct.life += dt;
+          if (ct.life >= ct.maxLife) ct.active = false;
+        }
+
+        for (const cf of this.confettiPool) {
+          if (!cf.active) continue;
+          cf.life += dt;
+          if (cf.life >= cf.maxLife) { cf.active = false; continue; }
+          cf.vy += 120 * dt;
+          cf.x += (cf.vx + Math.sin(cf.phase) * 35) * dt;
+          cf.y += cf.vy * dt;
+          cf.phase += cf.vphase * dt;
+          cf.rot += cf.vrot * dt;
+        }
+
         for (const a of this.ambient) {
           a.y -= a.vy * dt;
           if (a.y < -0.04) {
@@ -3955,14 +4881,33 @@
         }
 
         ctx.save();
-        ctx.translate(sx, sy);
+        if (this.boardZoom > 0) {
+          const z = 1 + Math.sin((this.boardZoom / 0.032) * Math.PI * 0.5) * this.boardZoom;
+          const bcx = this.boardX + this.boardPx * 0.5;
+          const bcy = this.boardY + this.boardPx * 0.5;
+          ctx.translate(bcx + sx, bcy + sy);
+          ctx.scale(z, z);
+          ctx.translate(-bcx, -bcy);
+        } else {
+          ctx.translate(sx, sy);
+        }
 
         const boardSprite = this.sprites.boardCanvases[this.worldIdx];
         if (boardSprite) {
           ctx.drawImage(boardSprite, this.boardX, this.boardY, this.boardPx, this.boardPx);
         }
 
-        if (this.combo >= 2 && !this.gameOver) {
+        if (this.feverMoves > 0 && !this.gameOver) {
+          ctx.save();
+          ctx.globalCompositeOperation = 'lighter';
+          const fevCol = FEVER_RAINBOW_COLORS[Math.floor(this.time * 10) % FEVER_RAINBOW_COLORS.length];
+          ctx.strokeStyle = fevCol;
+          ctx.globalAlpha = 0.72 + Math.sin(this.time * 14) * 0.22;
+          ctx.lineWidth = 4.5;
+          roundRectPath(ctx, this.boardX - 2, this.boardY - 2, this.boardPx + 4, this.boardPx + 4, 18);
+          ctx.stroke();
+          ctx.restore();
+        } else if (this.combo >= 2 && !this.gameOver) {
           ctx.save();
           ctx.globalCompositeOperation = 'lighter';
           ctx.strokeStyle = world.accent;
@@ -4116,9 +5061,15 @@
             const deadPhase = this.gameOver && ((r + c) / 14 <= this.gameOverAnim);
             // Blocos da linha prestes a quebrar brilham com a cor da peça arrastada
             const displayColorId = (isPredictedCell && !deadPhase) ? this.drag.piece.colorId : colorId;
-            const sprite = deadPhase
-              ? this.sprites.deadBlocks[useWorld]
-              : this.sprites.blocks[useWorld][displayColorId];
+            let sprite;
+            if (deadPhase) {
+              sprite = this.sprites.deadBlocks[useWorld];
+            } else if (this.feverMoves > 0 && this.sprites.feverBlocks.length > 0) {
+              const fIdx = (r + c + Math.floor(this.time * 8)) % this.sprites.feverBlocks.length;
+              sprite = this.sprites.feverBlocks[fIdx];
+            } else {
+              sprite = this.sprites.blocks[useWorld][displayColorId];
+            }
 
             if ((this.combo >= 3 || isPredictedCell) && !deadPhase) {
               const glow = this.sprites.glows[displayColorId];
@@ -4269,6 +5220,48 @@
           ctx.arc(s.x, s.y, ease * s.maxR, 0, Math.PI * 2);
           ctx.stroke();
         }
+
+        // Anéis de estouro por célula na onda dominó
+        for (const r of this.cellRingPool) {
+          if (!r.active) continue;
+          const t = r.life / r.maxLife;
+          const ease = 1 - Math.pow(1 - t, 2.5);
+          ctx.globalAlpha = (1 - t) * 0.85;
+          ctx.strokeStyle = r.color;
+          ctx.lineWidth = Math.max(1.2, (1 - t) * 4.5);
+          ctx.beginPath();
+          ctx.arc(r.x, r.y, ease * r.maxR, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+
+        // Lâmina cortadora de luz cruzando a linha/coluna de ponta a ponta
+        for (const ct of this.cutterPool) {
+          if (!ct.active) continue;
+          const t = ct.life / ct.maxLife;
+          const prog = ct.dir > 0 ? t : (1 - t);
+          const span = this.boardPx - this.padPx * 2;
+          const bladeLen = this.cellPx * 2.4;
+          ctx.globalAlpha = (1 - t * 0.65) * 0.95;
+          if (ct.isRow) {
+            const cy = this.boardY + this.padPx + ct.index * step + this.cellPx * 0.5;
+            const bx = this.boardX + this.padPx + prog * span;
+            const g = ctx.createLinearGradient(bx - bladeLen * 0.5, 0, bx + bladeLen * 0.5, 0);
+            g.addColorStop(0, 'rgba(255,255,255,0)');
+            g.addColorStop(0.5, '#FFFFFF');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(bx - bladeLen * 0.5, cy - this.cellPx * 0.42, bladeLen, this.cellPx * 0.84);
+          } else {
+            const cx = this.boardX + this.padPx + ct.index * step + this.cellPx * 0.5;
+            const by = this.boardY + this.padPx + prog * span;
+            const g = ctx.createLinearGradient(0, by - bladeLen * 0.5, 0, by + bladeLen * 0.5);
+            g.addColorStop(0, 'rgba(255,255,255,0)');
+            g.addColorStop(0.5, '#FFFFFF');
+            g.addColorStop(1, 'rgba(255,255,255,0)');
+            ctx.fillStyle = g;
+            ctx.fillRect(cx - this.cellPx * 0.42, by - bladeLen * 0.5, this.cellPx * 0.84, bladeLen);
+          }
+        }
         ctx.restore();
 
         ctx.restore();
@@ -4298,7 +5291,9 @@
           const startX = this.slotCenters[i] - pw * 0.5;
           const startY = trayCenterY - ph * 0.5;
 
-          const sprite = this.sprites.blocks[this.worldIdx][piece.colorId];
+          const sprite = (this.feverMoves > 0 && this.sprites.feverBlocks.length > 0)
+            ? this.sprites.feverBlocks[(i * 2 + Math.floor(this.time * 8)) % this.sprites.feverBlocks.length]
+            : this.sprites.blocks[this.worldIdx][piece.colorId];
           ctx.save();
           if (!fits) ctx.globalAlpha = 0.34;
           for (let r = 0; r < rows; r++) {
@@ -4323,7 +5318,9 @@
           const ph = rows * dCell + (rows - 1) * dGap;
           const sx0 = this.drag.x - pw * 0.5;
           const sy0 = (this.drag.y - liftY) - ph * 0.5;
-          const sprite = this.sprites.blocks[this.worldIdx][piece.colorId];
+          const sprite = (this.feverMoves > 0 && this.sprites.feverBlocks.length > 0)
+            ? this.sprites.feverBlocks[Math.floor(this.time * 10) % this.sprites.feverBlocks.length]
+            : this.sprites.blocks[this.worldIdx][piece.colorId];
 
           ctx.fillStyle = 'rgba(0, 0, 0, 0.22)';
           for (let r = 0; r < rows; r++) {
@@ -4364,6 +5361,36 @@
             ctx.fillStyle = p.color;
             ctx.fillRect(-p.size * 0.5, -p.size * 0.5, p.size, p.size);
           }
+          ctx.restore();
+        }
+
+        // 9b. Estilhaços giratórios dos blocos quebrados
+        for (const sh of this.shatterPool) {
+          if (!sh.active) continue;
+          const a = 1 - sh.life / sh.maxLife;
+          ctx.save();
+          ctx.globalAlpha = a;
+          ctx.translate(sh.x, sh.y);
+          ctx.rotate(sh.rot);
+          ctx.fillStyle = sh.color;
+          roundRectPath(ctx, -sh.w * 0.5, -sh.h * 0.5, sh.w, sh.h, 2);
+          ctx.fill();
+          ctx.fillStyle = sh.light;
+          ctx.fillRect(-sh.w * 0.35, -sh.h * 0.35, sh.w * 0.7, Math.max(1.5, sh.h * 0.28));
+          ctx.restore();
+        }
+
+        // 9c. Chuva de confetes metálicos 3D (multi-linhas / combos 3x+ / FEVER)
+        for (const cf of this.confettiPool) {
+          if (!cf.active) continue;
+          const a = 1 - Math.pow(cf.life / cf.maxLife, 2);
+          const flipW = Math.max(1.5, Math.abs(Math.cos(cf.phase)) * cf.size);
+          ctx.save();
+          ctx.globalAlpha = clamp(a, 0, 1);
+          ctx.translate(cf.x, cf.y);
+          ctx.rotate(cf.rot);
+          ctx.fillStyle = cf.color;
+          ctx.fillRect(-flipW * 0.5, -cf.size * 0.32, flipW, cf.size * 0.64);
           ctx.restore();
         }
 

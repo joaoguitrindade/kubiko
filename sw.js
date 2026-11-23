@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kubiko-pwa-v4';
+const CACHE_NAME = 'kubiko-pwa-v7';
 const PRECACHE_ASSETS = [
   './',
   './index.html',
